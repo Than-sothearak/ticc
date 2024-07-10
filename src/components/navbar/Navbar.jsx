@@ -1,13 +1,13 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { MdMenu, MdClose } from "react-icons/md";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
-
+import { usePathname } from 'next/navigation'
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [pathName, setPathName] = useState("/");
+  const pathName = usePathname()
 
 
   const links = [
@@ -50,7 +50,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="text-white bg-[#0f51a1]/85 fixed z-10 w-full flex items-center justify-between px-6 py-4 text-sm">
+    <div className="text-black/90 bg-white fixed z-10 w-full flex items-center justify-between px-6 py-4 text-sm">
      
       {/* MANIN LOGO */}
       <div>
@@ -59,7 +59,7 @@ const Navbar = () => {
           className="rounded-md flex items-center justify-center gap-2"
         >
           <Image 
-        src="/images/logo02.png" 
+        src="/images/logo.png" 
         alt="Example Image" 
         width={136}
         height={300} 
@@ -75,7 +75,6 @@ const Navbar = () => {
           onClick={(e) => {
             e.preventDefault();
             const target = e.target;
-            setPathName(target.getAttribute("href"));
             const id = target.getAttribute("href")?.replace("#", "");
             const element = document.getElementById(id);
 
@@ -120,7 +119,7 @@ const Navbar = () => {
                 },
               }}
             >
-              <MdMenu size={28} color="white" />
+              <MdMenu size={28} color="black" />
             </motion.div>
           )}
         </button>

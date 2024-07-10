@@ -1,12 +1,19 @@
+"use client"
 import React from "react";
+import { motion } from "framer-motion";
 import { PiCubeFill } from "react-icons/pi";
 import Image from "next/image";
 
 const Section2 = () => {
   return (
-    <div className={`h-full 2xl:h-[1500px]'} flex justify-center w-full py-16`}>
+    <div className={`h-full 2xl:h-[1500px]'}w-full m-auto py-16 my-16`}>
       <div className="container flex-col-reverse flex xl:flex-row">
-        <div className="w-full">
+        <motion.div
+          className="w-full"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
           <Image
             src="/images/IMG_2504.JPG"
             width={400}
@@ -14,18 +21,16 @@ const Section2 = () => {
             className="w-full h-[720px] object-cover p-10"
           />
 
-          <Image
-            src="/images/IMG_2639.JPG"
-            width={400}
-            height={100}
-            className="w-full h-[720px] object-cover p-10"
-          />
-        </div>
+        </motion.div>
 
-        <div className="container p-10">
+        <motion.div
+          className="container p-10"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1 }}
+        >
           <h1 className="font-bold text-[2.986rem] leading-tight">
-            Experience the Future: <br></br> Techno Innovation Challenge
-            Cambodia
+            Techno Innovation Challenge Cambodia
           </h1>
           <p className="mt-10">
             The Techno Innovation Challenge Cambodia is a competition program
@@ -65,8 +70,21 @@ const Section2 = () => {
               </li>
             </ul>
           </div>
-          <div className="container">
-            <div className="mt-10 2xl:mt-16">
+         
+        </motion.div>
+      </div>
+
+      <div className="container flex-col-reverse flex xl:flex-row">
+   
+
+        <motion.div
+          className="container p-10"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1 }}
+        >
+           <div className="container">
+            <div className="">
               <p>
                 The challenge event will be four-weekend duration that is mostly
                 performed over a weekend for universities students to team up,
@@ -119,9 +137,26 @@ const Section2 = () => {
                 perspectives.
               </p>
             </div>
-          </div>
-        </div>
+            </div>
+         
+        </motion.div>
+        <motion.div
+          className="w-full"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <Image
+            src="/images/IMG_2531.JPG"
+            width={400}
+            height={100}
+            className="w-full h-[720px] object-cover p-10"
+          />
+
+        </motion.div>
       </div>
+
+     
     </div>
   );
 };
