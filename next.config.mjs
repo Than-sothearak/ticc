@@ -4,9 +4,11 @@ const nextConfig = {
         remotePatterns: [
           {
             protocol: 'https',
-            hostname: 'img.freepik.com',
+            hostname: 'img.freepik.com', 
           },
         ],
+
+        domains: ['lh3.googleusercontent.com', 'photos.fife.usercontent.google.com'],
       },
 };
 

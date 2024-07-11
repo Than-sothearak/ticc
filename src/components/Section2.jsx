@@ -18,13 +18,13 @@ const Section2 = () => {
             src="/images/IMG_2504.JPG"
             width={400}
             height={100}
-            className="w-full h-[720px] object-cover p-10"
+            className="w-full h-[720px] object-cover lg:p-10 p-0"
           />
 
         </motion.div>
 
         <motion.div
-          className="container p-10"
+          className="container lg:p-10 p-0"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1 }}
@@ -78,12 +78,12 @@ const Section2 = () => {
    
 
         <motion.div
-          className="container p-10"
+          className="container lg:p-10 p-0"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1 }}
         >
-           <div className="container">
+           <div className="container lg:p-10 p-2">
             <div className="">
               <p>
                 The challenge event will be four-weekend duration that is mostly
@@ -150,7 +150,7 @@ const Section2 = () => {
             src="/images/IMG_2531.JPG"
             width={400}
             height={100}
-            className="w-full h-[720px] object-cover p-10"
+            className="w-full h-[720px] object-cover lg:p-10 p-0"
           />
 
         </motion.div>

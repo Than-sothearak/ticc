@@ -4,7 +4,7 @@ const Section5 = () => {
   return (
     <div className={`flex justify-center w-full py-16`}>
       <div className="container grid grid-cols-1 xl:grid-cols-2">
-        <div className="container p-10">
+        <div className="container lg:p-10 p-0">
           <h1 className="font-bold text-[2.986rem] leading-tight">Benefits</h1>
           <p className="mt-10">Contestants can benefit from the program</p>
           <br></br>

@@ -23,7 +23,7 @@ const page = () => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.2, duration: 1 }}
-                className="font-bold text-[3.986rem] uppercase leading-tight top-10 w-full backdrop-blur-sm"
+                className="font-bold sm:text-[3.986rem] uppercase leading-tight top-10 text-3xl"
               >
                 Frequently Asked Questions
               </motion.span>{" "}
@@ -35,7 +35,7 @@ const page = () => {
         <div className="container text-start">
           <h1 className="font-bold text-[2.986rem] leading-tight">FQA</h1>
 
-          <Accordion type="single" collapsible>
+          <Accordion type="multiple" collapsible>
             <AccordionItem value="item-1">
               <AccordionTrigger>How do I get involved?</AccordionTrigger>
               <AccordionContent>

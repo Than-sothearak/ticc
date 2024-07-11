@@ -4,7 +4,7 @@ const Section4 = () => {
   return (
     <div className={`flex justify-center w-full pt-16`}>
       <div className="container grid grid-cols-1 xl:grid-cols-2">
-        <div className="container p-10">
+        <div className="container lg:p-10 p-0">
           <h1 className="font-bold text-[2.986rem] leading-tight">
             Backgorund
           </h1>
@@ -28,7 +28,7 @@ const Section4 = () => {
             (TAMU)’s Innovation Challenge, called <a href="https://engineering.tamu.edu/student-life/aggies-invent/index.html" className="text-blue-700 underline">Aggies Invent.</a>
           </p>
         </div>
-        <div className="flex flex-col gap-4 justify-center items-center">
+        <div className="flex flex-col gap-4 justify-center items-center mt-10 lg:mt-0">
           <img
             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcREKFHgAvqJFkyraBofQTNx-A1oi5WL5LcJDA&s"
             className="w-96"

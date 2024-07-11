@@ -10,7 +10,7 @@ const Contact = () => {
       </h1>
 
       <div className="flex flex-col gap-16 lg:gap-36 lg:flex-row mt-16">
-        <div className="container">
+        <div className="container lg:p-10 p-0">
           <div className="mb-10 flex flex-col gap-4">
             <h5 className="font-bold text-[1.44rem] text-blue-800">
               Contact us

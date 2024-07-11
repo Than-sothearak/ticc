@@ -10,14 +10,14 @@ const page = () => {
             <motion.div
               initial={{ opacity: 0, y: 50 }} // Initial animation properties
               animate={{ opacity: 1, y: 0 }} // Animation properties to animate to
-              transition={{ duration: 1 }} 
+              transition={{ duration: 1 }}
               // Animation duration
             >
               <motion.span
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.2, duration: 1 }}
-                className="font-bold text-[3.986rem] uppercase leading-tight top-10"
+                className="font-bold md:text-[3.986rem] uppercase leading-tight top-10 text-3xl"
               >
                 <h1 className="drop-shadow-sm">Past-Event</h1>
               </motion.span>{" "}
@@ -28,8 +28,6 @@ const page = () => {
       <div className="flex justify-center items-center my-10">
         <div className="container text-start">
           <h1 className="font-bold text-[2.986rem] leading-tight">FQA</h1>
-
-          
         </div>
       </div>
     </div>

@@ -23,7 +23,7 @@ const page = () => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.2, duration: 1 }}
-                className="font-bold text-[3.986rem] uppercase leading-tight top-10 w-full"
+                className="font-bold md:text-[3.986rem] uppercase leading-tight top-10 text-3xl"
               >
                 Information & Schedule
               </motion.span>{" "}
