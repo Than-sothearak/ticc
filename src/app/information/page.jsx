@@ -1,11 +1,6 @@
 "use client";
 import React from "react";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
+
 import { motion } from "framer-motion";
 const page = () => {
   return (

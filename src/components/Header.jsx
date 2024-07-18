@@ -55,7 +55,7 @@ const Header = () => {
   }, [currentIndex]);
 
   return (
-    <div className="max-w-full w-full m-auto z-0 h-[1024px] top-16 flex items-center justify-center relative group">
+    <div className="max-w-full w-full m-auto z-0 h-[1024px] flex items-center justify-center relative group">
       <div className="w-full h-full overflow-hidden absolute">
         <div
           className={`flex transition-transform ${
