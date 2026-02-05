@@ -14,7 +14,7 @@ const BackgroundSection = () => {
         <div className="container grid grid-cols-1 xl:grid-cols-2 gap-10">
 
           {/* Left Side - Text */}
-          <div className="container lg:p-10 p-0 flex flex-col gap-6">
+          <div className="container lg:p-10 p-0 flex flex-col gap-6 mb-16">
             <FadeUp variants={staggerItem}>
               <h1 className="font-bold text-[2.986rem] leading-tight">Background</h1>
             </FadeUp>
@@ -46,7 +46,7 @@ const BackgroundSection = () => {
             <FadeUp variants={staggerItem}>
               <img
                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcREKFHgAvqJFkyraBofQTNx-A1oi5WL5LcJDA&s"
-                className="w-96 rounded-md shadow-lg"
+                className="w-96 rounded-md"
                 alt="ITC Campus"
               />
             </FadeUp>
@@ -54,7 +54,7 @@ const BackgroundSection = () => {
             <FadeUp variants={staggerItem}>
               <img
                 src="https://marvel-b1-cdn.bc0a.com/f00000000294758/www.midland.edu/academics/images/university-partnerships/tamu-academy/tamu-engineering-logo.png"
-                className="w-96 rounded-md shadow-lg"
+                className="w-96 rounded-md "
                 alt="TAMU Logo"
               />
             </FadeUp>
