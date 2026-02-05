@@ -29,7 +29,7 @@ export function Profile({session}) {
             <AvatarFallback>CN</AvatarFallback>
           </Avatar>
           <div>
-            <h1 className="font-semibold text-start">{session.user.username}</h1>
+            <h1 className="font-semibold text-start">{session.user.username}testing</h1>
           <p>{session.user.email}</p>
           </div>
         </div>
