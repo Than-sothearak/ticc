@@ -1,9 +1,17 @@
-import React from 'react'
+"use client"
+import React from "react";
+import { LoginForm } from "@/components/LoginForm";
+import { SessionProvider } from "next-auth/react";
 
-const loginPage = () => {
+const LoginPage = () => {
+
   return (
-    <div className='max-w-full h-[428px] flex justify-center relative'>loginPage</div>
-  )
-}
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
+  <SessionProvider>
+       <LoginForm />
+  </SessionProvider>
+    </div>
+  );
+};
 
-export default loginPage
+export default LoginPage;

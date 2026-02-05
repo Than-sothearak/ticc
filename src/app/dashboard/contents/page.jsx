@@ -2,7 +2,7 @@ import React from 'react'
 
 const cmsPage = () => {
   return (
-    <div>cmsPage</div>
+    <div className='w-full'>cmsPage</div>
   )
 }
 

@@ -1,9 +1,13 @@
-import React from 'react'
+"use client"
+import React from "react";
+import UserForm from "../(components)/UserForm";
 
 const userPage = () => {
   return (
-    <div>userPage</div>
-  )
-}
+ 
+      <UserForm />
 
-export default userPage
+  );
+};
+
+export default userPage;

@@ -5,12 +5,17 @@ import ObjectivesSection from "@/components/ObjectivesSection";
 import AboutSection from "@/components/AboutSection";
 import BackgroundSection from "@/components/BackgroundSection";
 import VideoHero from "@/components/VideoHero";
+import Navbar from "@/components/navbar/Navbar";
 
 const Contact = dynamic(() => import("../components/Contact"), { ssr: false });
 
 export default function Home() {
+  
+
   return (
-    <main className="relative">
+   <div>
+    <Navbar />
+     <main className="relative">
       <Header />
       {/* <VideoHero/> */}
       <div className="flex flex-col min-h-screen" id="section2">
@@ -28,5 +33,6 @@ export default function Home() {
         </div>
       </div>
     </main>
+   </div>
   );
 }
