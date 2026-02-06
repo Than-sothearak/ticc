@@ -2,6 +2,7 @@
 import React from "react";
 
 import { motion } from "framer-motion";
+import { InfoPageComponent } from "@/components/InfoPageComponent";
 const page = () => {
   return (
     <div className="w-full">
@@ -26,11 +27,13 @@ const page = () => {
           </div>
         </div>
       </div>
-      <div className="flex justify-center items-center my-10">
+      <div className="flex justify-center items-center my-10 w-full">
+     
         <div className="container text-start">
           <p>Techno Innovation Challenge will challenge you to put your theory into practice solving real world problems and apply your skills and knowledge to build something amazing. During the competition, you will have access to tools, materials, labs and some supports if needed to develop your prototypes, and the training and mentoring. </p>
-
+               <InfoPageComponent />
         </div>
+   
       </div>
     </div>
   );

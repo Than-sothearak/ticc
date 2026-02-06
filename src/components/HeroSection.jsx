@@ -1,8 +1,11 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import { HangingCard } from "./HangingCard";
+import ShapeWave from "./ShapeWave";
+import { BlueTechWave } from "./WaveTech";
 
-const Header = ({ applyLink, slideShow }) => {
+const HeroSection = ({ applyLink, slideShow }) => {
   const slides = slideShow.images || [];
   const [currentIndex, setCurrentIndex] = useState(0);
   const containerRef = useRef(null);
@@ -42,6 +45,9 @@ const Header = ({ applyLink, slideShow }) => {
         ))}
       </div>
 
+      <HangingCard />
+   
+      <BlueTechWave />
       {/* Overlay content */}
       <div className="absolute inset-0 z-20 flex flex-col items-center justify-center text-center text-white px-4">
         <h1 className="text-4xl font-bold">
@@ -69,4 +75,4 @@ const Header = ({ applyLink, slideShow }) => {
   );
 };
 
-export default Header;
+export default HeroSection;

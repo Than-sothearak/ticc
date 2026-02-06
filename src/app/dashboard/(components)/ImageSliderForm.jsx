@@ -164,8 +164,8 @@ const handleCancel = () => {
 
       {/* Upload modal unchanged */}
       {isUpload && (
-        <div className="flex items-center justify-center w-full">
-          <Card className="relative p-2 w-full">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80">
+          <Card className="relative p-2 ">
             <button type="button" onClick={() => setIsUpload(false)}>
               <X />
             </button>
