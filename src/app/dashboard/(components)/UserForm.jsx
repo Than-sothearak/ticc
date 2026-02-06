@@ -55,9 +55,9 @@ export default function UserForm() {
   };
 
   return (
-    <div className="mt-8 space-y-6">
+    <div className="mt-8 space-y-6 lg:px-16 px-2">
       {/* Form Card */}
-      <Card>
+      <Card className="md:w-[580px] w-full m-auto">
         <CardHeader>
           <CardTitle>Add Admin</CardTitle>
           <CardDescription>
@@ -65,8 +65,8 @@ export default function UserForm() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form onSubmit={handleSubmit} className="flex gap-2 items-end">
-            <div className="">
+          <form onSubmit={handleSubmit} className="flex gap-2 items-end w-full">
+            <div className="w-full">
               <Label htmlFor="email">Email</Label>
               <Input
                 type="email"
@@ -86,7 +86,7 @@ export default function UserForm() {
 
       {/* Users Table */}
       {users.length > 0 && (
-        <Card>
+        <Card className="md:w-[580px] w-full m-auto">
           <CardHeader>
             <CardTitle>Admin Lists</CardTitle>
           </CardHeader>

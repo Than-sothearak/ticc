@@ -4,6 +4,7 @@ import { BiBookBookmark, BiCategory,  BiSolidReport } from "react-icons/bi";
 import { MdOutlineWorkHistory } from "react-icons/md";
 import { IoSettings, IoSettingsSharp } from "react-icons/io5";
 import { IoIosHelpCircle } from "react-icons/io";
+import { LogsIcon } from "lucide-react";
 export const pageNavigation = {
   name: "Pages",
   links: [ {
@@ -11,11 +12,11 @@ export const pageNavigation = {
     name: "Dashboard",
     icon: <MdSpaceDashboard size={18} />,
   },
-   {
-    path: "/dashboard/products",
-    name: "Product",
-    icon: <FaCartArrowDown size={18} />, 
-  },
+ {
+      path: "/dashboard/partners",
+      name: "Logo Partner",
+      icon: <LogsIcon size={18} />,
+    },
     {
     path: "/dashboard/contents",
     name: "Content Management",

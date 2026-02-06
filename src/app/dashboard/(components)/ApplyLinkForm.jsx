@@ -1,0 +1,163 @@
+"use client";
+import React, { useState, useTransition } from "react";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+} from "@/components/ui/card";
+
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
+import { useRouter } from "next/navigation";
+
+export default function ApplyLinkForm({ data }) {
+  const [isPending, startTransition] = useTransition();
+  const [isEditing, setIsEditing] = useState();
+
+  const [formData, setFormData] = useState({
+    link: data?.src || "",
+    enabled: data?.enabled || false,
+  });
+ const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  startTransition(async () => {
+    let method = data?._id ? "PUT" : "POST";
+
+    try {
+      const res = await fetch("/api/content/apply", {
+        method,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          _id: data?._id,
+          link: formData.link,
+          enabled: formData.enabled,
+        }),
+      });
+
+      const result = await res.json();
+      if (!res.ok) alert(result.message);;
+
+      setFormData({
+        link: result.src,
+        enabled: result.enabled,
+      });
+
+      setIsEditing(false);
+      alert(result.message);
+    } catch (err) {
+      console.error(err);
+    }
+  });
+};
+
+  const handleCancel = () => {
+    setIsEditing(false);
+      setFormData({
+        link: data?.src || "",
+    enabled: data?.enabled || false,
+      });
+  };
+
+  const handleToggleEnabled = () => {
+    if (!isEditing) return;
+    setFormData((prev) => ({
+      ...prev,
+      enabled: !prev.enabled,
+    }));
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className="mt-8 space-y-6 lg:px-16 px-2">
+      {/* Form Card */}
+      <Card className="md:w-[580px] w-full m-auto">
+        <CardHeader className="flex flex-row justify-between items-start ">
+          <div className="space-y-2">
+            <CardTitle>Apply link</CardTitle>
+            <CardDescription>
+              Paste the application link below for apply form
+            </CardDescription>
+          </div>
+          <div className="flex gap-2">
+            {isEditing ? (
+              <Button
+                size="sm"
+                variant="outline"
+                type="button"
+                onClick={() => handleCancel()}
+              >
+                Cancel
+              </Button>
+            ) : (
+              <Button
+                size="sm"
+                onClick={() => setIsEditing(true)}
+                type="button"
+              >
+                Edit
+              </Button>
+            )}
+
+            {isEditing && (
+              <Button size="sm" disabled={isPending} type="submit">
+                {isPending ? "Saving..." : "Save"}
+              </Button>
+            )}
+          </div>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div className="w-full">
+            <Label htmlFor="email">Link</Label>
+            <Input
+              disabled={!isEditing}
+              type="text"
+              id="link"
+              placeholder="https://www.google.com..."
+              value={formData.link}
+              onChange={(e) =>
+                setFormData((prev) => ({
+                  ...prev,
+                  link: e.target.value,
+                }))
+              }
+            />
+          </div>
+          <div className="flex gap-2">
+        
+            <button
+              type="button"
+              onClick={handleToggleEnabled}
+              disabled={!isEditing}
+              className={`
+      relative inline-flex h-6 w-11 items-center rounded-full
+      transition-colors duration-300
+      ${formData.enabled ? "bg-primary" : "bg-gray-300"}
+      ${!isEditing ? "opacity-60 cursor-not-allowed" : ""}
+    `}
+            >
+              <span
+                className={`
+        inline-block h-4 w-4 rounded-full bg-white
+        transform transition-transform duration-300
+        ${formData.enabled ? "translate-x-6" : "translate-x-1"}
+      `}
+              />
+            </button>
+                <label className="">
+              {formData.enabled ? "Enabled" : "Disabled"}
+            </label>
+          </div>
+          <CardDescription>
+            When enabled, users will see the Apply button and can submit
+            applications. When disabled, the Apply button will be hidden.
+          </CardDescription>
+        </CardContent>
+      </Card>
+    </form>
+  );
+}

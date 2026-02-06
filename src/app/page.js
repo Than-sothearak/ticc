@@ -6,17 +6,21 @@ import AboutSection from "@/components/AboutSection";
 import BackgroundSection from "@/components/BackgroundSection";
 import VideoHero from "@/components/VideoHero";
 import Navbar from "@/components/navbar/Navbar";
+import { Content } from "@/models/Content";
 
 const Contact = dynamic(() => import("../components/Contact"), { ssr: false });
 
-export default function Home() {
+export default async function Home() {
   
-
+  const data = await Content.findOne()
+  const applyLink = JSON.parse(JSON.stringify(data.apply_link))
+  const slideShow = JSON.parse(JSON.stringify(data.slide_show))
+  
   return (
    <div>
     <Navbar />
      <main className="relative">
-      <Header />
+      <Header applyLink={applyLink} slideShow={slideShow} />
       {/* <VideoHero/> */}
       <div className="flex flex-col min-h-screen" id="section2">
         <div className="w-full text-start flex flex-col justify-center items-center">
