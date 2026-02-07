@@ -35,7 +35,7 @@ const ObjectivesSection = () => {
               {/* Objective Cards */}
               <StaggerSection className="flex flex-col gap-10 lg:flex-row">
                 <FadeUp variants={staggerItem} className="flex flex-col items-center gap-6 border p-10 rounded-md w-full  text-white bg-white/10">
-                  <div className="flex items-center justify-center rounded-full bg-blue-500 text-white w-16 h-16">
+                  <div className="flex items-center justify-center rounded-full bg-primary text-white w-16 h-16">
                     <GrTechnology size={32} />
                   </div>
                   <p className="text-center">
@@ -45,7 +45,7 @@ const ObjectivesSection = () => {
                 </FadeUp>
 
                 <FadeUp variants={staggerItem} className="flex flex-col items-center gap-6 border p-10 rounded-md w-full text-white bg-white/10">
-                  <div className="flex items-center justify-center rounded-full bg-blue-500 text-white w-16 h-16">
+                  <div className="flex items-center justify-center rounded-full bg-primary text-white w-16 h-16">
                     <GiTeamIdea size={32} />
                   </div>
                   <p className="text-center">
@@ -54,7 +54,7 @@ const ObjectivesSection = () => {
                 </FadeUp>
 
                 <FadeUp variants={staggerItem} className="flex flex-col items-center gap-6 border p-10 rounded-md w-full text-white bg-white/10">
-                  <div className="flex items-center justify-center rounded-full bg-blue-500 text-white w-16 h-16">
+                  <div className="flex items-center justify-center rounded-full bg-primary text-white w-16 h-16">
                     <BiWorld size={32} />
                   </div>
                   <p className="text-center">

@@ -91,7 +91,7 @@ const handleCancel = () => {
         <CardHeader className="flex flex-row justify-between items-center ">
           <div className="flex gap-2">
             <Button
-              size="sm"
+        
               variant="outline"
                onClick={() => setIsUpload(true)}
               type="button"
@@ -101,7 +101,7 @@ const handleCancel = () => {
 
             {isEditing ? (
               <Button
-                size="sm"
+          
                 variant="outline"
                 type="button"
                 onClick={() => handleCancel()}
@@ -110,7 +110,7 @@ const handleCancel = () => {
               </Button>
             ) : (
               <Button
-                size="sm"
+              
                 onClick={() => setIsEditing(true)}
                 type="button"
               >
@@ -119,7 +119,7 @@ const handleCancel = () => {
             )}
 
             {isEditing && (
-              <Button size="sm" disabled={isPending} type="submit">
+              <Button  disabled={isPending} type="submit">
                 {isPending ? "Saving..." : "Save"}
               </Button>
             )}
@@ -133,13 +133,13 @@ const handleCancel = () => {
             value={JSON.stringify(formData.removedImages)}
           />
 
-          <div className="flex flex-wrap gap-3">
+          <div className="grid lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-3 grid-cols-2 gap-3">
             {formData.logos.map((img, index) => (
               <div
                 key={index}
-                className="relative aspect-square h-11 w-11 border rounded-xl overflow-hidden group"
+                className="relative aspect-square h-24 w-full border rounded-xl overflow-hidden group"
               >
-                <Image fill src={img} alt="logo" className="object-cover" />
+                <Image fill src={img} alt="logo" className="object-contain" />
                 {isEditing && (
                   <Button
                     size="icon"

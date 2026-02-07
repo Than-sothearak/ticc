@@ -11,7 +11,6 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
-import { useRouter } from "next/navigation";
 
 export default function ApplyLinkForm({ data }) {
   const [isPending, startTransition] = useTransition();
@@ -73,9 +72,9 @@ export default function ApplyLinkForm({ data }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="mt-8 space-y-6 lg:px-16 px-2">
+    <form onSubmit={handleSubmit} className="md:w-[580px] w-full m-auto">
       {/* Form Card */}
-      <Card className="md:w-[580px] w-full m-auto">
+      <Card className="">
         <CardHeader className="flex flex-row justify-between items-start ">
           <div className="space-y-2">
             <CardTitle>Apply link</CardTitle>
@@ -86,7 +85,7 @@ export default function ApplyLinkForm({ data }) {
           <div className="flex gap-2">
             {isEditing ? (
               <Button
-                size="sm"
+              
                 variant="outline"
                 type="button"
                 onClick={() => handleCancel()}
@@ -95,7 +94,7 @@ export default function ApplyLinkForm({ data }) {
               </Button>
             ) : (
               <Button
-                size="sm"
+                
                 onClick={() => setIsEditing(true)}
                 type="button"
               >
@@ -104,7 +103,7 @@ export default function ApplyLinkForm({ data }) {
             )}
 
             {isEditing && (
-              <Button size="sm" disabled={isPending} type="submit">
+              <Button  disabled={isPending} type="submit">
                 {isPending ? "Saving..." : "Save"}
               </Button>
             )}

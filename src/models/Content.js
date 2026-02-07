@@ -1,39 +1,37 @@
 import mongoose, { Schema, model, models } from "mongoose";
 
-const ContentSchema = new Schema (
+const ContentSchema = new Schema(
+  {
+    apply_link: {
+      src: String,
+      enabled: Boolean,
+    },
+
+    slide_show:
     {
-  apply_link: {
-    src: String,
-    enabled: Boolean,
-  },
+      images: [{ type: String, required: true }],
+    },
 
-  slide_show: 
-     {
-       images: [{ type: String, required: true }],
-  },
+    information: {
+      enabled: Boolean,
 
-  discountSection: {
-    enabled: Boolean,
-    items: [
-      {
-        productId:{ type: mongoose.Types.ObjectId, ref: "Product" },
-        discountValue: Number,
-        startAt: Date,
-        endAt: Date,
-      }
-    ]
-  },
+      weeks: {
+        type: Map,
+        of: Date, // or String if you prefer
+        default: {},
+      },
+    },
 
-  specialPromotion: {
-    title: String,
-    description: String,
-    banner: String,
-    deadline: Date,
-    promoCode: String,
-    enabled: Boolean,
-  },
-}
+    specialPromotion: {
+      title: String,
+      description: String,
+      banner: String,
+      deadline: Date,
+      promoCode: String,
+      enabled: Boolean,
+    },
+  }
 
 )
 
-export const  Content = models.Content || model("Content", ContentSchema);
+export const Content = models.Content || model("Content", ContentSchema);

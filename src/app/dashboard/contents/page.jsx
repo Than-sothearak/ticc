@@ -11,7 +11,7 @@ const cmsPage = async () => {
     const data = await Content.findOne()
     
   return (
-    <div className='w-full m-auto space-y-6'>
+    <div className='mt-8 lg:px-16 px-2 space-y-6'>
       <ApplyLinkForm data={JSON.parse(JSON.stringify(data.apply_link))}/>
 
           <Card className="md:w-[580px] w-full m-auto">

@@ -27,6 +27,6 @@ export const stagger = {
 };
 
 export const staggerItem = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: { opacity: 0, y: 2 },
   visible: { opacity: 1, y: 0 },
 };

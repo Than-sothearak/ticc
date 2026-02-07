@@ -48,7 +48,7 @@ const Navbar = () => {
 
         {/* Desktop Links */}
         <div
-          className={`hidden lg:flex items-center gap-8 uppercase font-semibold transition-colors duration-300 ${
+          className={`hidden lg:flex items-center gap-8 uppercase font-semibold  ${
             scrolled ? "text-black" : "text-white"
           }`}
         >

@@ -4,22 +4,107 @@ import Image from "next/image";
 import ProcessDiagram from "./ProcessDiagramComponent";
 import FadeUp from "./motion/FadeUp";
 import { staggerItem } from "@/lib/motion";
+import StaggerSection from "./motion/StaggerSection";
+import { motion } from "framer-motion";
 
-export const InfoPageComponent = () => {
-  const schedule = [
-    { weekend: 1, date: "June 1-2, 2019" },
-    { weekend: 2, date: "June 8, 2019" },
-    { weekend: 3, date: "June 15, 2019" },
-    { weekend: 4, date: "June 22, 2019" },
-  ];
+export const InfoPageComponent = ({ information }) => {
+  function formatDate(date) {
+    if (!date) return "";
 
+    // Ensure date is a Date object
+    const d = date instanceof Date ? date : new Date(date);
+    if (isNaN(d.getTime())) return ""; // invalid date check
+
+    return d.toLocaleDateString("en-US", {
+      day: "2-digit",
+      month: "long",
+      year: "numeric",
+    });
+  }
+  console.log(information);
   return (
-    <div className="max-w-5xl mx-auto space-y-16">
+    <div className="mx-auto space-y-16 w-full">
+      <div className="max-w-full h-[428px] flex justify-center relative">
+        <div className="w-full text-white h-full m-auto grid bg-cover bg-no-repeat bg-[url('/images/IMG_2718.JPG')]">
+          <div className="container backdrop-blur-sm mx-auto absolute z-1 bottom-20 left-0 right-0">
+            <motion.div
+              initial={{ opacity: 0, y: 50 }} // Initial animation properties
+              animate={{ opacity: 1, y: 0 }} // Animation properties to animate to
+              transition={{ duration: 1 }}
+              // Animation duration
+            >
+              <motion.span
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.2, duration: 1 }}
+                className="font-bold md:text-[3.986rem] uppercase leading-tight top-10 text-3xl"
+              >
+                Information & Schedule
+              </motion.span>{" "}
+            </motion.div>
+          </div>
+        </div>
+      </div>
+<FadeUp>
+      <div className="container  flex justify-center">
+        
+          <div className="container bg-black w-full relative" style={{ aspectRatio: "16/6" }}>
+          <Image
+            src="/images/cover.jpg"
+            alt="Competition Process Image"
+            fill // use actual image height
+            className="object-cover"
+          />
+     
+      </div>
+         </div>
+        </FadeUp>
+      {/* Schedule */}
+      <div className="w-full bg-gray-100 py-16">
+        <FadeUp variants={staggerItem}>
+          <section className="space-y-4  container text-start my-16">
+            <h2 className="font-bold text-[2.986rem] leading-tight mb-4">
+              4-Week Program & Schedule
+            </h2>
+            {information.enabled ? (
+              <StaggerSection>
+                <ul className="list-disc list-inside space-y-2">
+                  {Object.entries(information.weeks).map(
+                    ([week, date], index) => (
+                      <FadeUp variants={staggerItem} key={week}>
+                        <li className="text-lg">
+                          <strong>Weekend {index + 1}:</strong>{" "}
+                          {formatDate(date)}
+                        </li>
+                      </FadeUp>
+                    ),
+                  )}
+                </ul>
+              </StaggerSection>
+            ) : (
+              <FadeUp>
+                <h1>No Schedule available</h1>
+              </FadeUp>
+            )}
+          </section>
+        </FadeUp>
+      </div>
       {/* Competition Process */}
-      <section className="flex flex-col items-start gap-6 mt-16">
-        <div className="">
+      <FadeUp className="bg-b">
+        <p className="container">
+          Techno Innovation Challenge will challenge you to put your theory into
+          practice solving real world problems and apply your skills and
+          knowledge to build something amazing. During the competition, you will
+          have access to tools, materials, labs and some supports if needed to
+          develop your prototypes, and the training and mentoring.{" "}
+        </p>
+      </FadeUp>
+      <section className="flex flex-col items-start gap-6 mt-16 w-full bg-gray-100">
+        <div className=" container text-start my-16">
           <FadeUp variants={staggerItem}>
-            <h2 className="text-4xl font-bold mb-4">Competition Process</h2>
+            <h2 className="font-bold text-[2.986rem] leading-tight mb-4">
+              Competition Process
+            </h2>
           </FadeUp>
           <FadeUp variants={staggerItem}>
             <p>
@@ -28,7 +113,9 @@ export const InfoPageComponent = () => {
             </p>
           </FadeUp>
         </div>
-        <FadeUp>
+      </section>
+      <div className="container flex max-lg:flex-wrap gap-6 ">
+        <FadeUp variants={staggerItem} className="w-full">
           <div className="relative h-full w-full">
             <Image
               src="/images/IMG_2639.JPG"
@@ -39,20 +126,10 @@ export const InfoPageComponent = () => {
             />
           </div>
         </FadeUp>
-      
-      </section>
-  <ProcessDiagram />
-      {/* Schedule */}
-      <section className="space-y-4">
-        <h2 className="text-4xl font-bold mb-4">4-Week Program & Schedule</h2>
-        <ul className="list-disc list-inside space-y-2">
-          {schedule.map((item) => (
-            <li key={item.week} className="text-lg">
-              <strong>Weekend {item.week}:</strong> {item.date}
-            </li>
-          ))}
-        </ul>
-      </section>
+        <FadeUp className="w-full">
+          <ProcessDiagram />
+        </FadeUp>
+      </div>
     </div>
   );
 };

@@ -91,7 +91,7 @@ const handleCancel = () => {
         <CardHeader className="flex flex-row justify-between items-center ">
           <div className="flex gap-2">
             <Button
-              size="sm"
+             
               variant="outline"
                onClick={() => setIsUpload(true)}
               type="button"
@@ -101,7 +101,7 @@ const handleCancel = () => {
 
             {isEditing ? (
               <Button
-                size="sm"
+          
                 variant="outline"
                 type="button"
                 onClick={() => handleCancel()}
@@ -110,7 +110,7 @@ const handleCancel = () => {
               </Button>
             ) : (
               <Button
-                size="sm"
+              
                 onClick={() => setIsEditing(true)}
                 type="button"
               >

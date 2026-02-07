@@ -28,7 +28,7 @@ export const BlueTechWave = () => {
         {/* Top Wave Layer */}
         <path
           d="M0,65 C150,75 450,35 600,65 C750,75 1050,35 1200,65 L1200,120 L0,120 Z"
-          fill="rgba(29, 78, 216, 0.6)" // dark blue
+          fill="rgba(15, 81, 161, 0.6)" // dark blue
         />
       </svg>
     </motion.div>

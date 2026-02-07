@@ -2,8 +2,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { HangingCard } from "./HangingCard";
-import ShapeWave from "./ShapeWave";
 import { BlueTechWave } from "./WaveTech";
+import FadeUp from "./motion/FadeUp";
+import Fade from "./motion/Fade";
 
 const HeroSection = ({ applyLink, slideShow }) => {
   const slides = slideShow.images || [];
@@ -50,24 +51,32 @@ const HeroSection = ({ applyLink, slideShow }) => {
       <BlueTechWave />
       {/* Overlay content */}
       <div className="absolute inset-0 z-20 flex flex-col items-center justify-center text-center text-white px-4">
-        <h1 className="text-4xl font-bold">
+       <FadeUp>
+         <h1 className="font-bold text-[2.986rem] leading-tight">
           Empower your innovation <br />
           with Techno Innovation Challenge <br />
           Cambodia
         </h1>
-        <p className="mt-4 text-lg max-w-xl">
+       </FadeUp>
+       <FadeUp>
+         <p className="mt-4 text-lg max-w-xl">
           Join our competition program and showcase your STEM-based solutions
           to solve real-world problems. Learn, compete, and win!
         </p>
+       </FadeUp>
         <div className="flex gap-6 mt-10">
-          <button className="px-4 py-3 border border-white rounded-sm">
+          <Fade>
+            <button className="px-4 py-3 border border-white rounded-sm">
             <a href="#section2">Learn more</a>
           </button>
+          </Fade>
 
           {applyLink?.enabled && (
-            <button className="px-4 py-3 bg-blue-600 rounded-sm">
+           <Fade>
+             <button className="px-4 py-3 bg-primary rounded-sm hover:bg-secondary hover:text-primary">
               <Link href={applyLink?.src}>Apply now</Link>
             </button>
+           </Fade>
           )}
         </div>
       </div>

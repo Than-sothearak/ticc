@@ -1,40 +1,61 @@
 import { MdContentCopy, MdMeetingRoom, MdOutlinePayment, MdSpaceDashboard } from "react-icons/md";
-import { FaCartArrowDown, FaUserCircle, FaUsers } from "react-icons/fa";
-import { BiBookBookmark, BiCategory,  BiSolidReport } from "react-icons/bi";
+import { FaCartArrowDown, FaChalkboardTeacher, FaUserCircle, FaUsers } from "react-icons/fa";
+import { BiBookBookmark, BiCategory,  BiInfoCircle,  BiSolidReport } from "react-icons/bi";
 import { MdOutlineWorkHistory } from "react-icons/md";
 import { IoSettings, IoSettingsSharp } from "react-icons/io5";
 import { IoIosHelpCircle } from "react-icons/io";
-import { LogsIcon } from "lucide-react";
+import { LogsIcon, TimerIcon } from "lucide-react";
 export const pageNavigation = {
   name: "Pages",
-  links: [ {
-    path: "/dashboard",
-    name: "Dashboard",
-    icon: <MdSpaceDashboard size={18} />,
-  },
- {
-      path: "/dashboard/partners",
-      name: "Logo Partner",
-      icon: <LogsIcon size={18} />,
-    },
+  links: [
     {
-    path: "/dashboard/contents",
-    name: "Content Management",
-    icon: <MdContentCopy size={18} />, 
-  },
-  {
-    path: "/dashboard/categories",
-    name: "Category",
-    icon: <BiCategory size={18} />, 
-  },
-  {
-    path: "/dashboard/users",
-    name: "Users",
-    icon: <FaUserCircle size={18} />,
-  }, 
-]
+      path: "/dashboard",
+      name: "Dashboard",
+      icon: <MdSpaceDashboard size={18} />,
+    },
 
-}
+    {
+      name: "Content Management",
+      icon: <MdContentCopy size={18} />,
+      sublink: [
+     
+        {
+          path: "/dashboard/contents",
+          name: "Hero section",
+          icon: <BiInfoCircle size={16} />,
+        },
+           {
+          path: "/dashboard/infomation",
+          name: "Infomation & schedule",
+          icon: <TimerIcon size={16} />,
+        },
+           {
+          path: "/dashboard/partners",
+          name: "Logo Partner",
+          icon: <LogsIcon size={16} />,
+        },
+        {
+          path: "/dashboard/mentors",
+          name: "Mentors",
+          icon: <FaChalkboardTeacher size={16} />,
+        },
+      ],
+    },
+
+    {
+      path: "/dashboard/categories",
+      name: "Category",
+      icon: <BiCategory size={18} />,
+    },
+
+    {
+      path: "/dashboard/users",
+      name: "Users",
+      icon: <FaUserCircle size={18} />,
+    },
+  ],
+};
+
 
 export const analyticNavigation = {
   name: "Analytics",
