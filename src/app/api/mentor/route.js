@@ -2,10 +2,10 @@ import { connectDb } from "@/lib/connectDb";
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 import { Admin } from "@/models/Admin";
-import { Content } from "@/models/Content";
 import { deleteFileFromS3, uploadFileToS3 } from "@/lib/uploadImageFileToS3";
 import { authOptions } from "../auth/[...nextauth]/route";
 import { Mentor } from "@/models/Mentor";
+import { revalidateTag } from "next/cache";
 
 export async function POST(req) {
     await connectDb();
@@ -35,6 +35,8 @@ export async function POST(req) {
             image: imageUrl,
             year: data.year
         })
+          revalidateTag("mentors");
+
         return NextResponse.json({
             success: true,
             message: "Mentor added successfully",

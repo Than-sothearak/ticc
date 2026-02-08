@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import React from "react";
 import { MentorTabe } from "../(components)/MentorTable";
 import { connectDb } from "@/lib/connectDb";
@@ -5,6 +6,7 @@ import { Mentor } from "@/models/Mentor";
 
 
 const mentorPage = async ({ searchParams }) => {
+
   await connectDb()
    const { query = "", year, sort = "asc" } = searchParams || {};
 
@@ -20,7 +22,6 @@ if (year && year !== "all") {
 
   // Fetch mentors from DB with sorting
   const mentors = await Mentor.find(mongoQuery).sort({ year: sort === "asc" ? 1 : -1 });
-
   // Get unique years for dropdown
   const uniqueYears = await Mentor.distinct("year");
   return (

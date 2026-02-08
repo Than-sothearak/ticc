@@ -54,8 +54,10 @@ export const MentorForm = ({ data }) => {
           ...data.mentor,
         }));
         alert(data.message);
+        router.replace("/dashboard/mentors");
+        router.refresh();
+
         setFile();
-        router.push("/dashboard/mentors");
       } catch (err) {
         console.error(err);
       }
