@@ -20,7 +20,8 @@ export default function ApplyLinkForm({ data }) {
   const [formData, setFormData] = useState({
     link: data?.src || "",
     enabled: data?.enabled || false,
-    deadline: data?.deadline || ""
+    deadline: data?.deadline || "",
+    title: data?.title || ""
   });
  const handleSubmit = async (e) => {
   e.preventDefault();
@@ -38,7 +39,8 @@ export default function ApplyLinkForm({ data }) {
           _id: data?._id,
           link: formData.link,
           enabled: formData.enabled,
-          deadline: formData.deadline
+          deadline: formData.deadline,
+          title: formData.title
         }),
       });
 
@@ -48,7 +50,8 @@ export default function ApplyLinkForm({ data }) {
       setFormData({
         link: result.src,
         enabled: result.enabled,
-        deadline: result.deadline
+        deadline: result.deadline,
+        title: result.title
       });
 
       setIsEditing(false);
@@ -64,6 +67,8 @@ export default function ApplyLinkForm({ data }) {
       setFormData({
         link: data?.src || "",
     enabled: data?.enabled || false,
+      deadline: data?.deadline || "",
+    title: data?.title || ""
       });
   };
 
@@ -114,6 +119,23 @@ export default function ApplyLinkForm({ data }) {
           </div>
         </CardHeader>
         <CardContent className="space-y-4">
+
+           <div className="w-full">
+            <Label htmlFor="email">Title</Label>
+            <Input
+              disabled={!isEditing}
+              type="text"
+              id="title"
+              placeholder="Program title...."
+              value={formData.title}
+              onChange={(e) =>
+                setFormData((prev) => ({
+                  ...prev,
+                  title: e.target.value,
+                }))
+              }
+            />
+          </div>
           <div className="w-full">
             <Label htmlFor="email">Link</Label>
             <Input

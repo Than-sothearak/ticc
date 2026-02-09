@@ -32,17 +32,17 @@ const BackgroundSection = () => {
 
             <FadeUp variants={staggerItem}>
               <p>
-                In 2017, ITC was selected as the only pilot institution for the
-                MS2W Institutional Innovation Challenge, called “Techno Innovation
-                Challenge Cambodia,” organized in November–December 2017 at ITC,
-                Phnom Penh. The program is based on Texas A&M University (TAMU)’s
-                Innovation Challenge, <a href="https://engineering.tamu.edu/student-life/aggies-invent/index.html" className="text-blue-700 underline">Aggies Invent</a>.
+                ITC was selected the only one to pilot the MS2W Institutional Innovation Challenge, which was named as
+“Techno Innovation Challenge Cambodia” in Cambodia during the first quarter of FY2019 by the USAID
+Connecting the Mekong through the Education and Training (USAID COMET) Project to be organized in
+2017, at Institute of Technology of Cambodia, Phnom Penh, Cambodia. The program is based on Texas
+A&M University (TAMU)’s Innovation Challenge, called <a href="https://engineering.tamu.edu/student-life/aggies-invent/index.html" className="text-blue-700 underline">Aggies Invent</a>.
               </p>
             </FadeUp>
           </div>
 
           {/* Right Side - Images */}
-          <div className="flex flex-col gap-6 justify-center items-center mt-10 lg:mt-0">
+          <div className="flex flex-col gap-6 justify-center items-center lg:mb-0 mb-10">
             <FadeUp variants={staggerItem}>
               <img
                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcREKFHgAvqJFkyraBofQTNx-A1oi5WL5LcJDA&s"
@@ -106,9 +106,7 @@ const BackgroundSection = () => {
               <FadeUp variants={staggerItem}>
                 <li>Presentation skills – effectively describe their solution in a succinct presentation.</li>
               </FadeUp>
-              <FadeUp variants={staggerItem}>
-                <li>Financial support from AUF to advance startup progress.</li>
-              </FadeUp>
+            
               <FadeUp variants={staggerItem}>
                 <li>Chances to win many other awards.</li>
               </FadeUp>

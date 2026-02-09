@@ -37,7 +37,7 @@ export const ApplicationComponent = ({ applyLink }) => {
             <StaggerSection>
               <FadeUp>
               <h2 className="font-bold text-[2.986rem] leading-tight mb-4">
-                Apply now
+                {applyLink.title}
               </h2>
             </FadeUp>
             <FadeUp>
@@ -127,7 +127,13 @@ export const ApplicationComponent = ({ applyLink }) => {
                       <li>Business major</li>
                     </FadeUp>
                     <FadeUp>
-                      <li>Agriculture or Food </li>
+                      <li>Agriculture and Food Transformation </li>
+                    </FadeUp>
+                      <FadeUp>
+                      <li>Mechatronic and Robotic</li>
+                    </FadeUp>
+                     <FadeUp>
+                      <li>Information and Communication Technology (ICT)</li>
                     </FadeUp>
                   </ul>
                 </div>
@@ -166,23 +172,23 @@ export const ApplicationComponent = ({ applyLink }) => {
 
                 <ul className="list-disc pl-6 space-y-2 marker:text-lg">
                   <FadeUp delay={0.1}>
-                  <li>  Each member completes the online application form
-                    individually.</li>
-                  </FadeUp>
+                  <li> <strong>Only one representative (team leader) submits the application form.</strong>                  
 
-                  <FadeUp >
-                    <li>                    Only selected applicant can join with you in the team.
-</li>
-                  </FadeUp>
+                     </li>
+</FadeUp>
+
+ 
 
                   <FadeUp delay={0.3}>
-                  <li>  You will check with your team members if they pass the
-                    shortlist.</li>
+                  <li>  The team leader must list all team members’ names in the application.</li>
                   </FadeUp>
 
                   <FadeUp delay={0.4}>
-                  <li>  You can join and have new member during team-up session on
-                    the first day.</li>
+                  <li>  The entire team will be evaluated together.</li>
+                  </FadeUp>
+
+                   <FadeUp delay={0.4}>
+                  <li>  You can  changes and have new member during team-up session on the first day.</li>
                   </FadeUp>
                 </ul>
               </div>

@@ -9,7 +9,7 @@ export async function POST(req) {
   try {
     await connectDb();
 
-    const { link, enabled, deadline } = await req.json();
+    const { link, enabled, deadline, title } = await req.json();
 
     if (!link) {
       return NextResponse.json(
@@ -26,22 +26,25 @@ export async function POST(req) {
         apply_link: {
           src: link,
           enabled,
-           deadline
+          deadline,
+          title
         },
       });
     } else {
       content.apply_link.src = link;
       content.apply_link.enabled = enabled;
       content.apply_link.deadline = deadline;
+      content.apply_link.title = title;
       await content.save();
     }
 
     return NextResponse.json({
       success: true,
-      message: "Apply link saved successfully",
+      message: "Application form saved successfully",
       src: content.apply_link.src,
       enabled: content.apply_link.enabled,
-      deadline,
+      deadline: content.apply_link.deadline,
+      title: content.apply_link.title = title,
       _id: content._id,
     });
   } catch (err) {

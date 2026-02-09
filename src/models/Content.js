@@ -2,6 +2,7 @@ import mongoose, { Schema, model, models } from "mongoose";
 
 const ContentSchema = new Schema({
   apply_link: {
+    title: { type: String },
     src: String,
     enabled: Boolean,
     deadline: { type: Date },

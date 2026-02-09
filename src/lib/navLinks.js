@@ -20,8 +20,8 @@ export const pageNavigation = {
       sublink: [
      
         {
-          path: "/dashboard/hero-section",
-          name: "Hero section",
+          path: "/dashboard/application-form",
+          name: "Application",
           icon: <BiInfoCircle size={16} />,
         },
            {

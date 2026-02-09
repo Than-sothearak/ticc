@@ -20,14 +20,16 @@ const Logo = async () => {
         {/* Supported by */}
         <FadeUp>
           <div className="m-auto w-full gap-4 flex justify-center items-center flex-col">
-            <h2>Supported by</h2>
+            <h2 className="text-center">Our program is supported by Ministry of Education, Youth, and Sports, Ministry of Industry Science,
+Technology and Innovation. It is funded by Khmer Enterprise, Smart Axiata, The Foreign Trade Bank of
+Cambodia (FTB).</h2>
           
            <StaggerSection className="flex gap-4 items-end">
                {logos.logos.map((item) => (
               <FadeUp      key={item}>
                   <div
              
-                  className="h-32 flex items-center justify-center "
+                  className="h-24 flex items-center justify-center "
                 >
                   <Image
                     src={item}
