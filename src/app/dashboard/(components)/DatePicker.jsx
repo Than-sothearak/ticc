@@ -12,7 +12,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { CalendarIcon } from "lucide-react";
 import { useState, useEffect } from "react";
 
-function formatDate(date) {
+export function formatDate(date) {
   if (!date) return "";
 
   // Ensure date is a Date object
@@ -39,7 +39,7 @@ export function DatePickerInput({ label = "Week Date", value, onChange, disabled
   }, [value]);
 
   return (
-    <Field className="mx-auto w-48">
+    <Field className="mx-auto ">
       <FieldLabel className="uppercase">{label}</FieldLabel>
       <InputGroup>
         <InputGroupInput

@@ -17,6 +17,7 @@ const Navbar = () => {
 
   const links = [
     { url: "/", title: "Home" },
+     { url: "/application", title: "Application" },
     { url: "/information", title: "Information & Schedule" },
     { url: "/fqa", title: "FAQ" },
     { url: "/past-event", title: "Past Event" },

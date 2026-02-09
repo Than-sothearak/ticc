@@ -1,10 +1,15 @@
+import { ApplicationComponent } from '@/components/ApplicationComponent'
+import { connectDb } from '@/lib/connectDb';
+import { Content } from '@/models/Content';
 import React from 'react'
 
-const page = () => {
+const page = async () => {
+    await connectDb();
+    const data = await Content.findOne()
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-    <h1>Application</h1>
-    </main>
+   <ApplicationComponent 
+    applyLink={JSON.parse(JSON.stringify(data.apply_link))}
+   />
   )
 }
 

@@ -5,6 +5,7 @@ import { HangingCard } from "./HangingCard";
 import { BlueTechWave } from "./WaveTech";
 import FadeUp from "./motion/FadeUp";
 import Fade from "./motion/Fade";
+import { ApplyButton } from "./ApplyButton";
 
 const HeroSection = ({ applyLink, slideShow }) => {
   const slides = slideShow.images || [];
@@ -73,9 +74,7 @@ const HeroSection = ({ applyLink, slideShow }) => {
 
           {applyLink?.enabled && (
            <Fade>
-             <button className="px-4 py-3 bg-primary rounded-sm hover:bg-secondary hover:text-primary">
-              <Link href={applyLink?.src}>Apply now</Link>
-            </button>
+            <ApplyButton link={'/application'}/>
            </Fade>
           )}
         </div>

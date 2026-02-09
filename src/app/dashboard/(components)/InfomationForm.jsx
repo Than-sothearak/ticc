@@ -43,7 +43,7 @@ const handleCancel = () => {
   startTransition(async () => {
     let method = "PUT";
     try {
-      const res = await fetch("/api/content/infomation", {
+      const res = await fetch("/api/content/information", {
         method,
         headers: {
           "Content-Type": "application/json",

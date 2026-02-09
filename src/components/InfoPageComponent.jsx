@@ -6,8 +6,9 @@ import FadeUp from "./motion/FadeUp";
 import { staggerItem } from "@/lib/motion";
 import StaggerSection from "./motion/StaggerSection";
 import { motion } from "framer-motion";
+import { ApplyButton } from "./ApplyButton";
 
-export const InfoPageComponent = ({ information }) => {
+export const InfoPageComponent = ({ information,applyLink }) => {
   function formatDate(date) {
     if (!date) return "";
 
@@ -21,7 +22,6 @@ export const InfoPageComponent = ({ information }) => {
       year: "numeric",
     });
   }
-  console.log(information);
   return (
     <div className="mx-auto space-y-16 w-full">
       <div className="max-w-full h-[428px] flex justify-center relative">
@@ -45,20 +45,30 @@ export const InfoPageComponent = ({ information }) => {
           </div>
         </div>
       </div>
-<FadeUp>
-      <div className="container  flex justify-center">
-        
-          <div className="container bg-black w-full relative" style={{ aspectRatio: "16/6" }}>
-          <Image
-            src="/images/cover.jpg"
-            alt="Competition Process Image"
-            fill // use actual image height
-            className="object-cover"
-          />
-     
-      </div>
-         </div>
-        </FadeUp>
+      <FadeUp loop={true}>
+        <div className="px-2 flex flex-col gap-4 justify-center">
+   {information.poster && 
+           information.poster.map(item => (
+            
+               <div key={item}
+            className="container bg-black w-full relative"
+            style={{ aspectRatio: "16/9" }}
+          >{item.poster}
+            <Image
+              src={item}
+              alt="Competition Process Image"
+              fill // use actual image height
+              className="object-cover"
+            />
+          </div>
+           ))
+   }
+
+
+        </div>
+      </FadeUp>
+
+ 
       {/* Schedule */}
       <div className="w-full bg-gray-100 py-16">
         <FadeUp variants={staggerItem}>
@@ -87,7 +97,12 @@ export const InfoPageComponent = ({ information }) => {
               </FadeUp>
             )}
           </section>
+
         </FadeUp>
+        <div className="container m-auto flex justify-start">
+                               {applyLink?.enabled && 
+      <ApplyButton link={applyLink?.src} />}
+        </div>
       </div>
       {/* Competition Process */}
       <FadeUp className="bg-b">

@@ -11,6 +11,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
+import { DatePickerInput } from "./DatePicker";
 
 export default function ApplyLinkForm({ data }) {
   const [isPending, startTransition] = useTransition();
@@ -19,6 +20,7 @@ export default function ApplyLinkForm({ data }) {
   const [formData, setFormData] = useState({
     link: data?.src || "",
     enabled: data?.enabled || false,
+    deadline: data?.deadline || ""
   });
  const handleSubmit = async (e) => {
   e.preventDefault();
@@ -36,6 +38,7 @@ export default function ApplyLinkForm({ data }) {
           _id: data?._id,
           link: formData.link,
           enabled: formData.enabled,
+          deadline: formData.deadline
         }),
       });
 
@@ -45,6 +48,7 @@ export default function ApplyLinkForm({ data }) {
       setFormData({
         link: result.src,
         enabled: result.enabled,
+        deadline: result.deadline
       });
 
       setIsEditing(false);
@@ -155,6 +159,21 @@ export default function ApplyLinkForm({ data }) {
             When enabled, users will see the Apply button and can submit
             applications. When disabled, the Apply button will be hidden.
           </CardDescription>
+    
+           <div className="w-full flex justify-start">
+             <DatePickerInput
+              label="Application deadLine"
+              value={formData.deadline}
+              disabled={!isEditing}
+              onChange={(date) =>
+                setFormData({
+                  ...formData,
+                  deadline: date,
+                  
+                })
+              }
+            />
+           </div>
         </CardContent>
       </Card>
     </form>

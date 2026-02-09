@@ -20,13 +20,13 @@ export const pageNavigation = {
       sublink: [
      
         {
-          path: "/dashboard/contents",
+          path: "/dashboard/hero-section",
           name: "Hero section",
           icon: <BiInfoCircle size={16} />,
         },
            {
-          path: "/dashboard/infomation",
-          name: "Infomation & schedule",
+          path: "/dashboard/information",
+          name: "Information & schedule",
           icon: <TimerIcon size={16} />,
         },
            {
