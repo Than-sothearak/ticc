@@ -1,10 +1,10 @@
 import { MdContentCopy, MdMeetingRoom, MdOutlinePayment, MdSpaceDashboard } from "react-icons/md";
-import { FaCartArrowDown, FaChalkboardTeacher, FaUserCircle, FaUsers } from "react-icons/fa";
+import { FaCalendarDay, FaCartArrowDown, FaChalkboardTeacher, FaUserCircle, FaUsers } from "react-icons/fa";
 import { BiBookBookmark, BiCategory,  BiInfoCircle,  BiSolidReport } from "react-icons/bi";
 import { MdOutlineWorkHistory } from "react-icons/md";
 import { IoSettings, IoSettingsSharp } from "react-icons/io5";
 import { IoIosHelpCircle } from "react-icons/io";
-import { LogsIcon, TimerIcon } from "lucide-react";
+import { DockIcon, LogsIcon, TimerIcon } from "lucide-react";
 export const pageNavigation = {
   name: "Pages",
   links: [
@@ -22,7 +22,7 @@ export const pageNavigation = {
         {
           path: "/dashboard/application-form",
           name: "Application",
-          icon: <BiInfoCircle size={16} />,
+          icon: <DockIcon size={16} />,
         },
            {
           path: "/dashboard/information",
@@ -43,9 +43,9 @@ export const pageNavigation = {
     },
 
     {
-      path: "/dashboard/categories",
-      name: "Category",
-      icon: <BiCategory size={18} />,
+      path: "/dashboard/events",
+      name: "Event",
+      icon: <FaCalendarDay size={18} />,
     },
 
     {

@@ -8,7 +8,7 @@ import { File, X } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import ChooseImageFiles from "./ChooseImageFiles";
+import ChooseImageFiles from "../ChooseImageFiles";
 
 export const ImageSliderForm = ({ data }) => {
   const router = useRouter();
@@ -88,6 +88,7 @@ const handleCancel = () => {
   return (
     <form onSubmit={handleSubmit} className="p-4 relative space-y-6 w-full">
       <Card className="">
+        
         <CardHeader className="flex flex-row justify-between items-center ">
           <div className="flex gap-2">
             <Button
@@ -165,8 +166,8 @@ const handleCancel = () => {
       {/* Upload modal unchanged */}
       {isUpload && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80">
-          <Card className="relative p-2 ">
-            <button type="button" onClick={() => setIsUpload(false)}>
+          <Card className="relative w-full max-w-[580px]">
+            <button type="button" onClick={() => setIsUpload(false)} className="absolute right-3 top-3 rounded-full p-1 hover:bg-gray-100">
               <X />
             </button>
             <CardHeader>

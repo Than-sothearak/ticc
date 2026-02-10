@@ -8,7 +8,7 @@ import { File, X } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import ChooseImageFiles from "./ChooseImageFiles";
+import ChooseImageFiles from "../ChooseImageFiles";
 
 export const PartnerImageForm = ({ partnerData }) => {
   const router = useRouter();
@@ -164,11 +164,16 @@ const handleCancel = () => {
 
       {/* Upload modal unchanged */}
       {isUpload && (
-        <div className="flex items-center justify-center w-full">
-          <Card className="relative p-2 w-full">
-            <button type="button" onClick={() => setIsUpload(false)}>
-              <X />
-            </button>
+        <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/80 p-4">
+          <Card className="relative w-full max-w-[580px]">
+                 <button
+                            type="button"
+                            onClick={() => setIsUpload(false)}
+                            className="absolute right-3 top-3 rounded-full p-1 hover:bg-gray-100"
+                          >
+                            <X className="h-5 w-5" />
+                          </button>
+            
             <CardHeader>
               <CardTitle>Upload Logos</CardTitle>
             </CardHeader>

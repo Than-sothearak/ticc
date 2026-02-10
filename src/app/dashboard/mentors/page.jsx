@@ -1,6 +1,6 @@
 export const dynamic = "force-dynamic";
 import React from "react";
-import { MentorTabe } from "../(components)/MentorTable";
+import { MentorTabe } from "../(components)/mentor-form/MentorTable";
 import { connectDb } from "@/lib/connectDb";
 import { Mentor } from "@/models/Mentor";
 

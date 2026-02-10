@@ -1,7 +1,7 @@
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
-import { PartnerImageForm } from "../(components)/PartnerForm";
 import { connectDb } from "@/lib/connectDb";
 import { Partner } from "@/models/Partner";
+import { PartnerImageForm } from "../(components)/partner-form/PartnerForm";
 
 export default async function SettingPage() {
   await connectDb()

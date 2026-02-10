@@ -11,8 +11,8 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import ChooseSingleImage from "./ChooseSingleImage";
 import { useRouter } from "next/navigation";
+import ChooseSingleImage from "../ChooseSingleImage";
 
 export const MentorForm = ({ data }) => {
   const router = useRouter();

@@ -25,11 +25,11 @@ import {
 } from "@/components/ui/table";
 import { ChevronsUpDown, MoreHorizontalIcon } from "lucide-react";
 import Link from "next/link";
-import Search from "./Search";
+import Search from "../Search";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { MentorForm } from "./MentorForm";
-import { DeleteButton } from "./DeleteButton";
+import { DeleteButton } from "../DeleteButton";
 
 export function MentorTabe({ data, years }) {
   const router = useRouter();
@@ -144,7 +144,7 @@ export function MentorTabe({ data, years }) {
                             itemName={item.name}
                             onDelete={async () => {
                               const res = await fetch(
-                                `/api/mentor/${item._id}`,
+                                `/api/mentor/delete/${item._id}`,
                                 { method: "DELETE" },
                               );
                               const data = await res.json();

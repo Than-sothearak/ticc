@@ -51,7 +51,7 @@ export default function ChooseImageFiles({ files, setFiles }) {
   };
 
   return (
-    <Card>
+    <Card className="p-4">
       {/* Upload Box */}
       <div className="rounded-xl p-6 text-center space-y-4">
         <div className="flex justify-center">
@@ -84,11 +84,11 @@ export default function ChooseImageFiles({ files, setFiles }) {
 
       {/* Preview Strip */}
       {files?.length > 0 && (
-        <div className="flex gap-4 overflow-x-auto  p-4">
+        <Card className="flex gap-4 overflow-x-auto  p-4">
           {files.map((fileData, index) => (
             <div
               key={fileData.preview}
-              className="relative w-40 h-40 rounded-xl border overflow-hidden group flex-shrink-0"
+              className="relative w-40 h-40 border overflow-hidden group flex-shrink-0"
             >
               <img
                 src={fileData.preview}
@@ -112,7 +112,7 @@ export default function ChooseImageFiles({ files, setFiles }) {
                 <Button
                   type="button"
                   size="icon"
-                  variant="destructive"
+                  variant="outline"
                   onClick={() => handleRemoveFile(index)}
                 >
                   <BiTrash size={18} />
@@ -122,7 +122,7 @@ export default function ChooseImageFiles({ files, setFiles }) {
                   <Button
                     type="button"
                     size="icon"
-                    variant="secondary"
+                    variant="outline"
                     onClick={() => moveImage(index, "right")}
                   >
                     <BiChevronRight size={20} />
@@ -131,7 +131,7 @@ export default function ChooseImageFiles({ files, setFiles }) {
               </div>
             </div>
           ))}
-        </div>
+        </Card>
       )}
     </Card>
   );

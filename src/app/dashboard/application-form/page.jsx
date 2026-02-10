@@ -1,9 +1,9 @@
 import React from 'react'
-import ApplyLinkForm from '../(components)/ApplyLinkForm'
-import { ImageSliderForm } from '../(components)/ImageSliderForm'
 import { connectDb } from '@/lib/connectDb'
 import { Content } from '@/models/Content'
 import { Card, CardHeader, CardTitle } from '@/components/ui/card'
+import { ImageSliderForm } from '../(components)/information-form/ImageSliderForm'
+import ApplicationForm from '../(components)/application-form/ApplicationForm'
 
 const cmsPage = async () => {
 
@@ -12,7 +12,7 @@ const cmsPage = async () => {
     
   return (
     <div className='mt-8 lg:px-16 px-2 space-y-6'>
-      <ApplyLinkForm data={JSON.parse(JSON.stringify(data.apply_link))}/>
+      <ApplicationForm data={JSON.parse(JSON.stringify(data.apply_link))}/>
 
           <Card className="md:w-[580px] w-full m-auto">
               <CardHeader>

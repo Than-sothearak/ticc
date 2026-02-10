@@ -24,25 +24,26 @@ const Logo = async () => {
 Technology and Innovation. It is funded by Khmer Enterprise, Smart Axiata, The Foreign Trade Bank of
 Cambodia (FTB).</h2>
           
-           <StaggerSection className="flex gap-4 items-end">
-               {logos.logos.map((item) => (
-              <FadeUp      key={item}>
-                  <div
-             
-                  className="h-24 flex items-center justify-center "
-                >
-                  <Image
-                    src={item}
-                    alt="logo"
-                    height={192} // same as Tailwind h-48
-                    width={192} // initial width placeholder
-                    style={{ height: "100%", width: "auto" }}
-                    className="object-contain "
-                  />
-                </div>
-              </FadeUp>
-              ))}
-           </StaggerSection>
+       <StaggerSection className="flex gap-2 lg:gap-6 items-end">
+  {logos.logos.map((item, index) => (
+    <FadeUp key={item}>
+      <div
+        className={`flex items-center justify-center 
+          ${index === 0 ? "h-24" : "h-20"}
+        `}
+      >
+        <Image
+          src={item}
+          alt="logo"
+          height={192}
+          width={192}
+          className="object-contain w-full h-full"
+        />
+      </div>
+    </FadeUp>
+  ))}
+</StaggerSection>
+
      
           </div>
         </FadeUp>

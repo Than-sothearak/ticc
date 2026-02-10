@@ -1,8 +1,8 @@
 import React from "react";
-import InfomationForm from "../(components)/InfomationForm";
 import { Content } from "@/models/Content";
 import { connectDb } from "@/lib/connectDb";
-import { InformationPosterForm } from "../(components)/InformationPosterForm";
+import InfomationForm from "../(components)/information-form/InfomationForm";
+import { InformationPosterForm } from "../(components)/information-form/InformationPosterForm";
 
 const informationPage = async () => {
   await connectDb();

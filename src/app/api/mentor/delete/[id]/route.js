@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { Mentor } from "@/models/Mentor";
 import { connectDb } from "@/lib/connectDb";
 import { deleteFileFromS3 } from "@/lib/uploadImageFileToS3";
-import { authOptions } from "../../auth/[...nextauth]/route";
+import { authOptions } from "../../../auth/[...nextauth]/route";
 import { Admin } from "@/models/Admin";
 import { getServerSession } from "next-auth";
 

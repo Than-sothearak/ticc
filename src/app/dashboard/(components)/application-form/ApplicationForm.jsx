@@ -11,9 +11,9 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
-import { DatePickerInput } from "./DatePicker";
+import { DatePickerInput } from "../DatePicker";
 
-export default function ApplyLinkForm({ data }) {
+export default function ApplicationForm({ data }) {
   const [isPending, startTransition] = useTransition();
   const [isEditing, setIsEditing] = useState();
 

@@ -8,7 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { DatePickerInput } from "./DatePicker";
+import { DatePickerInput } from "../DatePicker";
 
 export default function InfomationForm({ data }) {
   const [isPending, startTransition] = useTransition();
@@ -39,7 +39,7 @@ const handleCancel = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
+  
   startTransition(async () => {
     let method = "PUT";
     try {
