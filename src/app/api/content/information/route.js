@@ -37,9 +37,7 @@ export async function PUT(req) {
     return NextResponse.json({
       success: true,
       message: "Infomation and schedule saved successfully",
-      weeks: content.information.weeks,
-      enabled: content.information.enabled,
-      _id: content._id,
+      content: content.info
     });
   } catch (err) {
     return NextResponse.json(

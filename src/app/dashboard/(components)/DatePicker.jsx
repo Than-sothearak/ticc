@@ -53,7 +53,7 @@ export function DatePickerInput({ label = "Week Date", value, onChange, disabled
             <Popover open={open} onOpenChange={setOpen}>
               <PopoverTrigger asChild>
                 <button className="p-1" aria-label={`Select date for ${label}`}>
-                  <CalendarIcon />
+                  <CalendarIcon size={18}/>
                 </button>
               </PopoverTrigger>
               <PopoverContent
@@ -62,6 +62,7 @@ export function DatePickerInput({ label = "Week Date", value, onChange, disabled
                 sideOffset={10}
               >
                 <Calendar
+              
                   mode="single"
                   selected={internalDate}
                   month={month}

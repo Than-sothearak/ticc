@@ -1,5 +1,5 @@
 import React from 'react'
-import { MentorForm } from '../../(components)/MentorForm'
+import { MentorForm } from '../../(components)/mentor-form/MentorForm'
 
 const addMentorPage = () => {
   return (
