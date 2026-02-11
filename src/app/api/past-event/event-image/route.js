@@ -34,13 +34,15 @@ export async function PUT(req) {
     }
     const removedImages = JSON.parse(formData.get("removedImages") || "[]");
     const imageFiles = formData.getAll("images") || [];
-
+    
+    const getRemovedImages = removedImages.map(i => i.url)
+ 
     // Remove deleted images
     let updateImage =
-      event.images.filter((img) => !removedImages.includes(img)) || [];
+      event.images.filter((img) => !getRemovedImages.includes(img)) || [];
     // Remove deleted images from S3
-    if (removedImages.length > 0) {
-      for (const img of removedImages) {
+    if (getRemovedImages.length > 0) {
+      for (const img of getRemovedImages) {
         const key = img.split("/").pop();
         if (key) await deleteFileFromS3(key);
       }
