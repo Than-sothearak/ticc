@@ -1,10 +1,11 @@
 "use client";
 
-import React, { useState, useTransition } from "react";
+import React, { useEffect, useState, useTransition } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { BiTrash } from "react-icons/bi";
 import { File, X } from "lucide-react";
+import { ReactSortable } from "react-sortablejs";
 import {
   Card,
   CardContent,
@@ -35,13 +36,23 @@ export const ImageManagerForm = ({
 
   const [images, setImages] = useState(initialImages);
   const [removedImages, setRemovedImages] = useState([]);
-
+  
+  // Remove image
   const handleRemoveImage = (index) => {
     const removed = images[index];
     setImages((prev) => prev.filter((_, i) => i !== index));
     setRemovedImages((prev) => [...prev, removed]);
   };
-  
+
+  // Cancel edits
+  const handleCancel = () => {
+    setImages(initialImages);
+    setRemovedImages([]);
+    setIsEditing(false);
+    setIsUpload(false);
+  };
+
+  // Submit updated images
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -49,6 +60,7 @@ export const ImageManagerForm = ({
       const formData = new FormData();
 
       formData.append("removedImages", JSON.stringify(removedImages));
+      formData.append("imagesOrder", JSON.stringify(images)); // ✅ send order
 
       if (id) formData.append("_id", id);
 
@@ -70,12 +82,13 @@ export const ImageManagerForm = ({
         } else {
           setImages(result?.[collectionName]?.[imageKey] || []);
         }
+
         alert(result.message);
         setRemovedImages([]);
         setFiles([]);
         setIsEditing(false);
         setIsUpload(false);
-        router.refresh()
+        router.refresh();
         if (redirectTo) router.push(redirectTo);
       } catch (err) {
         console.error(err);
@@ -83,14 +96,25 @@ export const ImageManagerForm = ({
     });
   };
 
-  const handleCancel = () => {
-    setImages(initialImages);
-    setRemovedImages([]);
-    setIsEditing(false);
-    setIsUpload(false);
-  };
-  
- 
+  useEffect(() => {
+    if (initialImages?.length) {
+      const normalized = initialImages?.map((img, i) => {
+        // If it's a string, use it. If it's an object, extract the URL
+        let url;
+        if (typeof img === "string") {
+          url = img;
+        } else if (img?.toString) {
+          url = img.toString(); // fallback if it's String wrapper
+        } else if (img?.url) {
+          url = img.url;
+        }
+        return { id: i, url };
+      }).filter(img => img.url); // remove any undefined
+      setImages(normalized);
+    }
+  }, [initialImages]);
+
+
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       <Card>
@@ -113,7 +137,7 @@ export const ImageManagerForm = ({
                 Cancel
               </Button>
             ) : (
-              initialImages.length > 0 && (
+              initialImages?.length > 0 && (
                 <Button onClick={() => setIsEditing(true)} type="button">
                   Edit
                 </Button>
@@ -129,8 +153,17 @@ export const ImageManagerForm = ({
         </CardHeader>
 
         <CardContent className="space-y-4">
-          <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-3">
-            {images.map((img, index) => (
+          {/* ✅ Drag-and-drop sortable */}
+          <ReactSortable
+            list={images}    
+            setList={setImages}
+            className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-3"
+            animation={150}
+              disabled={!isEditing} 
+                ghostClass="opacity-50" 
+              
+          >
+            {images?.map((img, index) => (
               <div
                 key={index}
                 className="relative h-full w-full border rounded-xl overflow-hidden group"
@@ -138,7 +171,7 @@ export const ImageManagerForm = ({
                 <Image
                   height={192}
                   width={192}
-                  src={img}
+                  src={img?.url}
                   alt={imageKey}
                   className="object-contain w-full h-full"
                 />
@@ -155,8 +188,9 @@ export const ImageManagerForm = ({
                 )}
               </div>
             ))}
-          </div>
+          </ReactSortable>
 
+          {/* Selected files info */}
           <div className="flex items-center gap-2 text-muted-foreground text-sm">
             <File size={16} />
             Selected files <Badge>{files.length}</Badge>

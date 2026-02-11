@@ -68,10 +68,10 @@ export const EventsComponent = ({events}) => {
   
          <StaggerSection className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
              {events.map((event) => (
-           <FadeUp>
+           <FadeUp  key={event.id}>
             <Link 
             href={`/past-event/${event._id}`}
-            key={event.id}>
+           >
              <motion.div
            
               whileHover={{ y: -10 }}
@@ -87,7 +87,6 @@ export const EventsComponent = ({events}) => {
 
           
             </motion.div>
-
                 {/* Content */}
               <div className="pt-4 space-y-2">
                 <div className="flex items-center gap-1"><MapPin size={18}/> <p>Phnom penh</p></div>

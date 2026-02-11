@@ -7,15 +7,15 @@ import { deleteFileFromS3, uploadFileToS3 } from "@/lib/uploadImageFileToS3";
 import { connectDb } from "@/lib/connectDb";
 
 export async function PUT(req) {
-    await connectDb();
-      const session = await getServerSession(authOptions);
-      const isAdmin = await Admin.findOne({ email: session?.user?.email });
-      if (!isAdmin) {
-          return NextResponse.json(
-              { success: false, message: "Access denied" },
-              { status: 403 },
-          );
-      }
+  await connectDb();
+  const session = await getServerSession(authOptions);
+  const isAdmin = await Admin.findOne({ email: session?.user?.email });
+  if (!isAdmin) {
+    return NextResponse.json(
+      { success: false, message: "Access denied" },
+      { status: 403 },
+    );
+  }
   try {
     const formData = await req.formData();
     const id = formData.get("_id");
@@ -34,12 +34,10 @@ export async function PUT(req) {
     }
     const removedImages = JSON.parse(formData.get("removedImages") || "[]");
     const imageFiles = formData.getAll("images") || [];
-    
-  
+
     // Remove deleted images
-    let updateImage = event.images.filter(
-      (img) => !removedImages.includes(img),
-    ) || [];
+    let updateImage =
+      event.images.filter((img) => !removedImages.includes(img)) || [];
     // Remove deleted images from S3
     if (removedImages.length > 0) {
       for (const img of removedImages) {
@@ -54,7 +52,17 @@ export async function PUT(req) {
         updateImage.push(url);
       }
     }
-    event.images = updateImage ;
+    const imagesOrder = JSON.parse(formData.get("imagesOrder") || "[]");
+
+  
+
+    // Only reorder if imagesOrder is valid
+    if (imagesOrder.length > 0) {
+        console.log("Images reorder")
+      event.images = imagesOrder.map(img => img.url);
+    } else {
+      event.images = updateImage;
+    }
     await event.save();
     return NextResponse.json({
       success: true,

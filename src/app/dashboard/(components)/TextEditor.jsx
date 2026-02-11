@@ -1,47 +1,40 @@
-"use client";
-
+import { useState, useEffect, useMemo } from "react";
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Image from "@tiptap/extension-image";
 import Link from "@tiptap/extension-link";
 import TextAlign from "@tiptap/extension-text-align";
 import HardBreak from "@tiptap/extension-hard-break";
-import { useMemo, useEffect } from "react";
-
 import { Button } from "@/components/ui/button";
-import { Bold, Heading2, List, ImageIcon, Heading3, Heading1 } from "lucide-react";
+import { Bold, Heading1, Heading2, Heading3, List, ImageIcon } from "lucide-react";
 
 export default function TextEditor({ value, onChange }) {
-  // ✅ Memoized extensions
-  const extensions = useMemo(
-    () => [
-      StarterKit.configure({
-        paragraph: {
-          HTMLAttributes: { class: "mt-3 leading-7" },
-        },
-      }),
-      HardBreak, // Shift+Enter inserts <br>
-      Image,
-      Link,
-      TextAlign.configure({ types: ["heading", "paragraph"] }),
-    ],
-    []
-  );
+  const [initialized, setInitialized] = useState(false); // track initial content load
+
+  const extensions = useMemo(() => [
+    StarterKit.configure({
+      paragraph: { HTMLAttributes: { class: "my-3 leading-7" } },
+    }),
+    HardBreak,
+    Image,
+    Link,
+    TextAlign.configure({ types: ["heading", "paragraph"] }),
+  ], []);
 
   const editor = useEditor({
     extensions,
-    editorProps: {},
     onUpdate: ({ editor }) => onChange(editor.getHTML()),
-    immediatelyRender: false, // <-
+    editorProps: {},
+    immediatelyRender: false,
   });
 
-  // ✅ Safely set content when editor or value changes
+  // ✅ Only set initial content once
   useEffect(() => {
-    if (editor) {
-      // Default to empty paragraph if value is empty
+    if (editor && !initialized) {
       editor.commands.setContent(value || "<p></p>");
+      setInitialized(true);
     }
-  }, [editor, value]);
+  }, [editor, value, initialized]);
 
   if (!editor) return null;
 
@@ -57,7 +50,6 @@ export default function TextEditor({ value, onChange }) {
         >
           <Bold size={16} />
         </Button>
-
         <Button
           type="button"
           size="sm"
@@ -66,7 +58,6 @@ export default function TextEditor({ value, onChange }) {
         >
           <Heading1 size={16} />
         </Button>
-
         <Button
           type="button"
           size="sm"
@@ -75,7 +66,6 @@ export default function TextEditor({ value, onChange }) {
         >
           <Heading2 size={16} />
         </Button>
-
         <Button
           type="button"
           size="sm"
@@ -84,7 +74,6 @@ export default function TextEditor({ value, onChange }) {
         >
           <Heading3 size={16} />
         </Button>
-
         <Button
           type="button"
           size="sm"
@@ -93,7 +82,6 @@ export default function TextEditor({ value, onChange }) {
         >
           <List size={16} />
         </Button>
-
         <Button
           type="button"
           size="sm"
@@ -110,12 +98,7 @@ export default function TextEditor({ value, onChange }) {
       {/* Editor Area */}
       <EditorContent
         editor={editor}
-        className="min-h-[180px] p-3 focus:outline-none prose max-w-none
-          [&_p]:mt-3 [&_p]:leading-7
-          [&_h1]:text-3xl [&_h1]:font-bold [&_h1]:mt-6
-          [&_h2]:text-2xl [&_h2]:font-semibold [&_h2]:mt-5
-          [&_h3]:text-xl [&_h3]:font-semibold [&_h3]:mt-4
-          [&_ul]:list-disc [&_ul]:pl-6 [&_ul]:mt-3"
+        className="min-h-[180px] p-3 focus:outline-none prose max-w-none [&_p]:mt-3 [&_p]:leading-7 [&_h1]:text-3xl [&_h1]:font-bold [&_h1]:mt-6 [&_h2]:text-2xl [&_h2]:font-semibold [&_h2]:mt-5 [&_h3]:text-xl [&_h3]:font-semibold [&_h3]:mt-4 [&_ul]:list-disc [&_ul]:pl-6 [&_ul]:mt-3"
       />
     </div>
   );

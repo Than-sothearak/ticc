@@ -20,8 +20,7 @@ export const EventGrid = ({ events }) => {
     setEventsData(events)
   }, [events])
 
-  console.log(eventsData)
-  console.log(events)
+
   return (
     <CardContent>
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
@@ -31,7 +30,7 @@ export const EventGrid = ({ events }) => {
               <div className="relative h-full w-full border rounded-lg overflow-hidden group">
                 <Image
                 
-                  src={e.images[0] || "/images/IMG_8244.JPG"}
+                  src={e?.images[0] || "/images/IMG_8244.JPG"}
                   alt={e.title}
                      height={192}
                  width={192}

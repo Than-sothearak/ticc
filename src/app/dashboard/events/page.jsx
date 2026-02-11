@@ -17,7 +17,7 @@ const eventPage = async () => {
    noStore(); // 🔥 force no cache
   await connectDb();
 
-  const events = await Event.find().lean();
+  const events = await Event.find().lean().sort({createdAt: -1});
   
   return (
     <div className="container my-4">

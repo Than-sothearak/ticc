@@ -65,6 +65,9 @@ useEffect(() => {
    
         if (!res.ok) alert(result.message);
         router.refresh()
+        if(!data) {
+          router.push(`/dashboard/events/${result.event._id}`)
+        }
         alert(result.message);
         setFormData({
           title: result.event.title,

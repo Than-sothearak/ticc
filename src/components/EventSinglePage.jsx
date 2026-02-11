@@ -35,7 +35,7 @@ export const EventSinglePage = ({ event }) => {
       </StaggerSection>
       {/* Hero Image */}
       {event?.images && (
-      <FadeUp>
+      <FadeUp loop={true}>
           <div className="relative w-full h-full rounded-2xl overflow-hidden">
           <Image
             src={event.images[0]}

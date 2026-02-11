@@ -23,7 +23,9 @@ const singleEventPage = async ({ params }) => {
             decription="Share the best moments from your event! Upload photos that capture activities, speakers, and memorable experiences."
             apiEndpoint="/api/past-event/event-image"
             imageKey="images"
-            initialImages={JSON.parse(JSON.stringify(event?.images)) || []}
+             initialImages={JSON.parse(JSON.stringify(event?.images || [])).map(img =>
+    typeof img === "string" ? img : img.url || ""
+  ).filter(Boolean)}
           />
 
           <ImageManagerForm
