@@ -4,13 +4,12 @@ import { GrTechnology } from "react-icons/gr";
 import { GiTeamIdea } from "react-icons/gi";
 import { BiWorld } from "react-icons/bi";
 import { staggerItem } from "@/lib/motion";
-import { BlueTechWave } from "./WaveTech";
 
 const ObjectivesSection = () => {
   return (
     <div className="w-full lg:h-screen flex justify-center text-center relative">
 
-      <BlueTechWave />
+
       <div className="w-full text-white h-full grid bg-no-repeat bg-[url('/images/IMG_8244.JPG')]">
         <div className="col-start-1 row-start-1 bg-gray-800 bg-opacity-80 w-full h-full"></div>
         <div className="col-start-1 row-start-1 mx-auto my-auto">

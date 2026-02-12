@@ -19,17 +19,17 @@ export default function EventForm({ data, session}) {
     postby: data?.postby || session?.user.username || ""
   });
 
-useEffect(() => {
-  if (data) {
-    setFormData({
-      title: data.title || "",
-      year: data.year || "",
-      season: data.season || "",
-      description: data.description || "",
-      postby: data.postby || session?.user?.username || ""
-    });
-  }
-}, [data]);
+  useEffect(() => {
+    if (data) {
+      setFormData({
+        title: data.title || "",
+        year: data.year || "",
+        season: data.season || "",
+        description: data.description || "",
+        postby: data.postby || session?.user?.username || "",
+      });
+    }
+  }, [data, session?.user?.username]);
 
   // Handle input
   const handleChange = (e) => {

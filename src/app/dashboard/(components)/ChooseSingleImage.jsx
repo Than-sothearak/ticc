@@ -6,6 +6,7 @@ import React from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import Image from "next/image";
 
 export default function ChooseSingleImage({ file, setFile }) {
   const handleFileChange = (e) => {
@@ -55,9 +56,10 @@ export default function ChooseSingleImage({ file, setFile }) {
       {/* Preview */}
       {file && (
         <div className="relative w-40 h-40 m-auto mt-4 rounded-xl border overflow-hidden">
-          <img
+          <Image
             src={file.preview}
             alt="Preview"
+            fill
             className="w-full h-full object-contain"
           />
 

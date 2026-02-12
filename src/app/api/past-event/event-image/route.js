@@ -34,9 +34,9 @@ export async function PUT(req) {
     }
     const removedImages = JSON.parse(formData.get("removedImages") || "[]");
     const imageFiles = formData.getAll("images") || [];
-    
-    const getRemovedImages = removedImages.map(i => i.url)
- 
+
+    const getRemovedImages = removedImages.map((i) => i.url);
+
     // Remove deleted images
     let updateImage =
       event.images.filter((img) => !getRemovedImages.includes(img)) || [];
@@ -48,20 +48,27 @@ export async function PUT(req) {
       }
     }
     // Upload new images to S3
-    for (const file of imageFiles) {
-      if (file.size > 0) {
-        const url = await uploadFileToS3(file);
-        updateImage.push(url);
-      }
-    }
-    const imagesOrder = JSON.parse(formData.get("imagesOrder") || "[]");
+    const uploadPromises = imageFiles
+      .filter((file) => file.size > 0)
+      .map((file) => uploadFileToS3(file));
 
-  
+    const uploadedUrls = await Promise.all(uploadPromises);
+    updateImage.push(...uploadedUrls);
+
+    const imagesOrder = JSON.parse(formData.get("imagesOrder") || "[]");
 
     // Only reorder if imagesOrder is valid
     if (imagesOrder.length > 0) {
-        console.log("Images reorder")
-      event.images = imagesOrder.map(img => img.url);
+      const orderedUrls = imagesOrder.map((img) => img.url);
+
+      // Add new images that are NOT in order list
+      for (const img of updateImage) {
+        if (!orderedUrls.includes(img)) {
+          orderedUrls.push(img);
+        }
+      }
+
+      event.images = orderedUrls;
     } else {
       event.images = updateImage;
     }

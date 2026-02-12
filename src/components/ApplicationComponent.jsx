@@ -96,12 +96,7 @@ export const ApplicationComponent = ({ applyLink }) => {
               <FadeUp>
                 <div className="space-y-4">
                   <p>
-                    ITC's Techno Innovation Challenge is open to all students
-                    enrolled at an accredited institution of higher education in
-                    Cambodia. The challenge is to competed as a team. To apply
-                    to join in the Techno Innovation Challenge, you can apply as
-                    a team or as an individual. Only selected teams or
-                    candidates can advance to the competition.
+              {"ITC's Techno Innovation Challenge is open to all students enrolled at an accredited institution of higher education in Cambodia. The challenge is to competed as a team. To apply to join in the Techno Innovation Challenge, you can apply as a team or as an individual. Only selected teams or candidates can advance to the competition."}
                   </p>
                   <h3 className="font-bold text-[1.986rem] leading-tight mb-4">
                     Eligibility:
@@ -196,7 +191,7 @@ export const ApplicationComponent = ({ applyLink }) => {
                 {applyLink.enabled ? (
                 <ApplyButton link={applyLink.src} />
               ) : (
-                <div className="flex gap-1 items-center text-white">
+                <div className="flex gap-1 items-center text-red-500">
                   <CircleAlert />
                   The application is not available
                 </div>

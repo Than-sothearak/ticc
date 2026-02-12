@@ -9,6 +9,7 @@ import {
   BiChevronLeft,
   BiChevronRight,
 } from "react-icons/bi";
+import Image from "next/image";
 
 export default function ChooseImageFiles({ files, setFiles }) {
   const updateInputFiles = (updatedFiles) => {
@@ -90,9 +91,10 @@ export default function ChooseImageFiles({ files, setFiles }) {
               key={fileData.preview}
               className="relative w-40 h-40 border overflow-hidden group flex-shrink-0"
             >
-              <img
+              <Image
                 src={fileData.preview}
                 alt="Preview"
+                fill
                 className="w-full h-full object-contain transition group-hover:opacity-40"
               />
 

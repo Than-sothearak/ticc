@@ -17,6 +17,21 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import ChooseImageFiles from "./ChooseImageFiles";
 
+  // Helper function to normalize images This function takes an array of images and converts each item into a standardized
+//  * format of `{ id, url }`. It ensures that all valid images have a unique `id`
+//  * (based on their index in the array) and a valid `url` string for rendering.
+  export const normalizeImages = (imgs) => {
+    return imgs
+      ?.map((img, i) => {
+        let url;
+        if (typeof img === "string") url = img;
+        else if (img?.url) url = img.url;
+        else if (img?.toString) url = img.toString();
+        return url ? { id: i, url } : null;
+      })
+      .filter(Boolean);
+  };
+
 export const ImageManagerForm = ({
   apiEndpoint,
   imageKey,
@@ -44,13 +59,6 @@ export const ImageManagerForm = ({
     setRemovedImages((prev) => [...prev, removed]);
   };
 
-  // Cancel edits
-  const handleCancel = () => {
-    setImages(initialImages);
-    setRemovedImages([]);
-    setIsEditing(false);
-    setIsUpload(false);
-  };
 
   // Submit updated images
   const handleSubmit = (e) => {
@@ -96,25 +104,18 @@ export const ImageManagerForm = ({
     });
   };
 
-  useEffect(() => {
-    if (initialImages?.length) {
-      const normalized = initialImages?.map((img, i) => {
-        // If it's a string, use it. If it's an object, extract the URL
-        let url;
-        if (typeof img === "string") {
-          url = img;
-        } else if (img?.toString) {
-          url = img.toString(); // fallback if it's String wrapper
-        } else if (img?.url) {
-          url = img.url;
-        }
-        return { id: i, url };
-      }).filter(img => img.url); // remove any undefined
-      setImages(normalized);
-    }
+
+
+    useEffect(() => {
+    setImages(normalizeImages(initialImages));
   }, [initialImages]);
 
-
+    const handleCancel = () => {
+    setImages(normalizeImages(initialImages));
+    setRemovedImages([]);
+    setIsEditing(false);
+    setIsUpload(false);
+  };
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       <Card>
@@ -171,7 +172,7 @@ export const ImageManagerForm = ({
                 <Image
                   height={192}
                   width={192}
-                  src={img?.url}
+                    src={img.url || '/images/missing.jpg'}
                   alt={imageKey}
                   className="object-contain w-full h-full"
                 />

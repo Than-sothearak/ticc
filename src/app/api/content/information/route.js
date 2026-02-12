@@ -37,7 +37,7 @@ export async function PUT(req) {
     return NextResponse.json({
       success: true,
       message: "Infomation and schedule saved successfully",
-      content: content.info
+      information: content.information
     });
   } catch (err) {
     return NextResponse.json(

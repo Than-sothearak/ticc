@@ -93,23 +93,28 @@ export async function PUT(req) {
     const removedImages = JSON.parse(formData.get("removedImages") || "[]");
     const imageFiles = formData.getAll("images") || [];
 
-    // ===== Remove images from DB =====
-    if (removedImages && removedImages.length > 0) {
-      updatedImages =
-        content.slide_show?.images?.filter(
-          (img) => !removedImages.includes(img),
-        ) || []; // fallback to empty array
-    } else {
-      updatedImages = content.slide_show?.images || [];
-    }
+    const getRemovedImages = removedImages.map((i) => i.url); //Put image link to array only
 
-    // ===== Delete from S3 (unchanged logic) =====
-    if (removedImages.length > 0) {
-      for (const img of removedImages) {
+    // Remove deleted images
+    let updateImages =
+      content.slide_show?.images.filter(
+        (img) => !getRemovedImages.includes(img),
+      ) || [];
+    // Remove deleted images from S3
+    if (getRemovedImages.length > 0) {
+      for (const img of getRemovedImages) {
         const key = img.split("/").pop();
         if (key) await deleteFileFromS3(key);
       }
     }
+    // Upload new images to S3
+    for (const file of imageFiles) {
+      if (file.size > 0) {
+        const url = await uploadFileToS3(file);
+        updateImages.push(url);
+      }
+    }
+    const imagesOrder = JSON.parse(formData.get("imagesOrder") || "[]");
 
     // ===== Upload new images to S3 (unchanged logic) =====
     for (const file of imageFiles) {
@@ -120,7 +125,20 @@ export async function PUT(req) {
       }
     }
 
-    content.slide_show.images = updatedImages;
+    // Only reorder if imagesOrder is valid
+    if (imagesOrder.length > 0) {
+      const orderedUrls = imagesOrder.map((img) => img.url);
+      // Add new images that are NOT in order list
+      for (const img of updateImages) {
+        if (!orderedUrls.includes(img)) {
+          orderedUrls.push(img);
+        }
+      }
+      content.slide_show.images = orderedUrls;
+    } else {
+      content.slide_show.images = updateImage;
+    }
+
     await content.save();
 
     return NextResponse.json({

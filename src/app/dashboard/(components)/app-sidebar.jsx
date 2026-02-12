@@ -21,9 +21,17 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { ChevronDown, ChevronRightIcon } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
-import { analyticNavigation, pageNavigation, userNavigation } from "@/lib/navLinks";
+import {
+  analyticNavigation,
+  pageNavigation,
+  userNavigation,
+} from "@/lib/navLinks";
 import { Profile } from "./Profile";
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
 
 export function AppSidebar({ session }) {
   const isMobile = useIsMobile();
@@ -61,25 +69,18 @@ export function AppSidebar({ session }) {
                 <SidebarMenuItem key={`parent-${index}`}>
                   <Collapsible defaultOpen={isParentActive}>
                     <CollapsibleTrigger asChild>
-                      <SidebarMenuButton
-                        className={cn(
-                          "group flex items-center justify-between w-full px-4 py-2 rounded transition-colors",
-                          isParentActive
-                            ? "bg-gray-200"
-                            : "text-gray-700 hover:bg-gray-100"
-                        )}
-                      >
+                      <SidebarMenuButton className="group flex items-center justify-between w-full px-4 py-2 rounded">
                         <span className="flex items-center">
                           <span className="mr-2">{link.icon}</span>
                           {link.name}
                         </span>
-
                         <ChevronRightIcon className="transition-transform group-data-[state=open]:rotate-90" />
                       </SidebarMenuButton>
                     </CollapsibleTrigger>
 
                     <CollapsibleContent>
-                      <div className="ml-6 flex flex-col">
+                      {/* ✅ MUST be SidebarMenu, NOT div */}
+                      <SidebarMenu className="ml-6 mt-1">
                         {link.sublink.map((sub) => {
                           const subBasePath = sub.path
                             .split("/")
@@ -94,19 +95,19 @@ export function AppSidebar({ session }) {
                               <SidebarMenuButton
                                 onClick={() => router.push(sub.path)}
                                 className={cn(
-                                  "flex items-center w-full px-4 py-2 text-sm rounded transition-colors",
+                                  "text-sm",
                                   isSubActive
                                     ? "bg-gray-100 font-semibold"
-                                    : "text-gray-600 hover:bg-gray-50"
+                                    : "hover:bg-gray-50",
                                 )}
                               >
-                                <span className="mr-2">{sub.icon}</span>
+                                {sub.icon}
                                 {sub.name}
                               </SidebarMenuButton>
                             </SidebarMenuItem>
                           );
                         })}
-                      </div>
+                      </SidebarMenu>
                     </CollapsibleContent>
                   </Collapsible>
                 </SidebarMenuItem>
@@ -130,7 +131,7 @@ export function AppSidebar({ session }) {
                     "flex items-center w-full px-4 py-2 rounded transition-colors",
                     isActive
                       ? "bg-primary font-bold text-white hover:bg-primary/80 hover:text-white"
-                      : "text-gray-700 hover:bg-primary/10"
+                      : "text-gray-700 hover:bg-primary/10",
                   )}
                 >
                   <span className="mr-2">{link.icon}</span>

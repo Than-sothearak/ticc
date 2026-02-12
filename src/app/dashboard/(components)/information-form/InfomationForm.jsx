@@ -60,8 +60,8 @@ export default function InfomationForm({ data }) {
         if (!res.ok) alert(result.message);
 
         setFormData({
-          weeks: result.weeks,
-          enabled: result.enabled,
+          weeks: result.information.weeks,
+          enabled: result.information.enabled,
         });
 
         setIsEditing(false);
@@ -137,7 +137,7 @@ export default function InfomationForm({ data }) {
           </div>
           <CardDescription>Turn this on to make the Information and Schedule visible to candidates.</CardDescription>
           <div className="grid grid-cols-2 gap-4">
-            {Object?.keys(formData?.weeks).map((week) => (
+            {Object.keys(formData?.weeks || {}).map((week) => (
               <DatePickerInput
                 key={week}
                 label={week}
