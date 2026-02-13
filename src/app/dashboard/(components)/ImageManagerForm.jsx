@@ -90,7 +90,7 @@ export const ImageManagerForm = ({
         } else {
           setImages(result?.[collectionName]?.[imageKey] || []);
         }
-
+        
         alert(result.message);
         setRemovedImages([]);
         setFiles([]);

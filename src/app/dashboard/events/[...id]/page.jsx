@@ -35,7 +35,9 @@ const singleEventPage = async ({ params }) => {
             decription="Share the best moments from your event! Upload photos that capture activities, speakers, and memorable experiences."
             apiEndpoint="/api/past-event/event-prototype"
             imageKey="prototypes"
-            initialImages={JSON.parse(JSON.stringify(event?.prototypes)) || []}
+                         initialImages={JSON.parse(JSON.stringify(event?.prototypes || [])).map(img =>
+    typeof img === "string" ? img : img.url || ""
+  ).filter(Boolean)}
           />
         </div>
       )}

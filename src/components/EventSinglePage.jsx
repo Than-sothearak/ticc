@@ -2,13 +2,15 @@
 import React from "react";
 import Image from "next/image";
 import { EventGallery } from "./EventGallery";
-import { Calendar } from "lucide-react";
+import { Calendar, UserCircle } from "lucide-react";
 import StaggerSection from "./motion/StaggerSection";
 import FadeUp from "./motion/FadeUp";
+import EventPrototypeGallery from "./EventProtypeGallery";
 
 export const EventSinglePage = ({ event }) => {
   return (
-    <div className="container mx-auto max-w-5xl py-6 px-4">
+    <div>
+      <div className="container mx-auto max-w-5xl py-6 px-4">
       {/* Title Section */}
       <StaggerSection>
         <div className="my-10">
@@ -26,9 +28,12 @@ export const EventSinglePage = ({ event }) => {
                 {event?.year}
               </span>
             </FadeUp>
-            <FadeUp>
+            <FadeUp className="flex gap-4">
               {event?.season && <span>{event.season}</span>}
-              {event?.postby && <span>✍️ {event.postby}</span>}
+             <div className="flex items-center gap-1">
+              <UserCircle size={18} />
+               {event?.postby && <span>{event.postby}</span>}
+             </div>
             </FadeUp>
           </div>
         </div>
@@ -69,6 +74,14 @@ prose
 
       {/* Gallery (Optional) */}
       {event?.images?.length > 0 && <EventGallery images={event.images} />}
+     
+    </div>
+      <div>
+        <div className="w-full bg-primary text-white py-16 text-center"><h1 className="text-6xl">Prototypes</h1></div>
+         <div className="container mx-auto max-w-5xl py-6 px-4">
+          {event?.prototypes?.length > 0 && <EventPrototypeGallery images={event.prototypes} />}
+         </div>
+       </div>
     </div>
   );
 };

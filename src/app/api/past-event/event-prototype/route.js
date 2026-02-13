@@ -7,15 +7,15 @@ import { deleteFileFromS3, uploadFileToS3 } from "@/lib/uploadImageFileToS3";
 import { connectDb } from "@/lib/connectDb";
 
 export async function PUT(req) {
-    await connectDb();
-      const session = await getServerSession(authOptions);
-      const isAdmin = await Admin.findOne({ email: session?.user?.email });
-      if (!isAdmin) {
-          return NextResponse.json(
-              { success: false, message: "Access denied" },
-              { status: 403 },
-          );
-      }
+  await connectDb();
+  const session = await getServerSession(authOptions);
+  const isAdmin = await Admin.findOne({ email: session?.user?.email });
+  if (!isAdmin) {
+    return NextResponse.json(
+      { success: false, message: "Access denied" },
+      { status: 403 },
+    );
+  }
   try {
     const formData = await req.formData();
     const id = formData.get("_id");
@@ -34,19 +34,24 @@ export async function PUT(req) {
     }
     const removedImages = JSON.parse(formData.get("removedImages") || "[]");
     const imageFiles = formData.getAll("images") || [];
-    
+
+    const getRemovedImages = removedImages.map((i) => i.url);
+
   
-    // Remove deleted images
-    let updateImage = event.prototypes.filter(
-      (img) => !removedImages.includes(img),
-    ) || [];
-    // Remove deleted images from S3
-    if (removedImages.length > 0) {
-      for (const img of removedImages) {
+    let updateImage = event.prototypes.filter((img) => !getRemovedImages.includes(img)) || [];
+    if (getRemovedImages.length > 0) {
+      for (const img of getRemovedImages) {
         const key = img.split("/").pop();
         if (key) await deleteFileFromS3(key);
       }
     }
+    // Upload new images to S3
+    const uploadPromises = imageFiles
+      .filter((file) => file.size > 0)
+      .map((file) => uploadFileToS3(file));
+  
+    const uploadedUrls = await Promise.all(uploadPromises);
+    updateImage.push(...uploadedUrls);
     // Upload new images to S3
     for (const file of imageFiles) {
       if (file.size > 0) {
@@ -54,7 +59,21 @@ export async function PUT(req) {
         updateImage.push(url);
       }
     }
-    event.prototypes = updateImage ;
+      const imagesOrder = JSON.parse(formData.get("imagesOrder") || "[]");
+       if (imagesOrder.length > 0) {
+      const orderedUrls = imagesOrder.map((img) => img.url);
+
+      // Add new images that are NOT in order list
+      for (const img of updateImage) {
+        if (!orderedUrls.includes(img)) {
+          orderedUrls.push(img);
+        }
+      }
+
+      event.prototypes = orderedUrls;
+    } else {
+      event.prototypes = updateImage;
+    }
     await event.save();
     return NextResponse.json({
       success: true,
