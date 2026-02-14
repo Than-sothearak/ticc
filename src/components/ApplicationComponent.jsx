@@ -12,7 +12,7 @@ export const ApplicationComponent = ({ applyLink }) => {
     <div>
       <div className="max-w-full h-[428px] flex justify-center relative">
         <div className="w-full text-white h-full m-auto grid bg-cover bg-no-repeat bg-[url('/images/IMG_2718.JPG')]">
-          <div className="container backdrop-blur-sm mx-auto absolute z-1 bottom-20 left-0 right-0">
+          <div className="container backdrop-blur-sm mx-auto absolute z-1 bottom-20 left-0 right-0 lg:px-14">
             <motion.div
               initial={{ opacity: 0, y: 50 }} // Initial animation properties
               animate={{ opacity: 1, y: 0 }} // Animation properties to animate to
@@ -32,8 +32,8 @@ export const ApplicationComponent = ({ applyLink }) => {
         </div>
       </div>
       <div>
-        <section className="flex flex-col items-start gap-6 space-y-16 w-full bg-gray-100">
-          <div className=" container text-start my-16">
+        <section className="flex flex-col items-start gap-6 space-y-16 w-full bg-gray-100 ">
+          <div className=" container text-start my-16 lg:px-14">
             <StaggerSection>
               <FadeUp>
               <h2 className="font-bold text-[2.986rem] leading-tight mb-4">
@@ -81,7 +81,7 @@ export const ApplicationComponent = ({ applyLink }) => {
         </section>
 
         <section className="flex flex-col items-start gap-6 space-y-16 w-full bg-primary text-white">
-          <div className="container space-y-4 text-start my-16">
+          <div className="container space-y-4 text-start my-16 lg:px-14">
             <FadeUp>
               <h2 className="font-bold text-[2.986rem] leading-tight mb-4">
                 Application Form
@@ -91,7 +91,7 @@ export const ApplicationComponent = ({ applyLink }) => {
         </section>
 
         <section className="flex flex-col items-start gap-6 w-full bg-white">
-          <div className=" container text-start my-16">
+          <div className=" container text-start my-16 lg:px-14">
             <div className="space-y-6">
               <FadeUp>
                 <div className="space-y-4">
@@ -138,7 +138,7 @@ export const ApplicationComponent = ({ applyLink }) => {
         </section>
 
         <section className="flex flex-col items-start gap-6 space-y-16 w-full bg-gray-100">
-          <div className="container space-y-4 text-start my-16">
+          <div className="container space-y-4 text-start my-16 lg:px-14">
             <FadeUp>
               <h3 className="font-bold text-[1.986rem] leading-tight mb-4">
                 How to Apply:
@@ -202,7 +202,7 @@ export const ApplicationComponent = ({ applyLink }) => {
         </section>
 
         <section className="flex flex-col items-start gap-6 space-y-16 w-full bg-red-100">
-          <div className=" container text-start my-16">
+          <div className=" container text-start my-16 lg:px-14">
             <FadeUp>
               {applyLink.enabled ? (
                 <h3 className="font-bold text-[1.986rem] leading-tight mb-4">
@@ -224,7 +224,7 @@ export const ApplicationComponent = ({ applyLink }) => {
         </section>
 
         <section className="flex flex-col items-start gap-6 w-full bg-white">
-          <div className=" container text-start my-16">
+          <div className=" container text-start my-16 lg:px-14">
             <FadeUp>
               <div className="space-y-6">
                 <FadeUp>
@@ -272,7 +272,7 @@ export const ApplicationComponent = ({ applyLink }) => {
         </section>
 
         <section className="flex flex-col items-start gap-6 space-y-16 w-full bg-gray-100">
-          <div className=" container text-start my-16">
+          <div className=" container text-start my-16 lg:px-14">
             <FadeUp>
               <div className="space-y-6">
                 <h3 className=" text-lg mb-2">

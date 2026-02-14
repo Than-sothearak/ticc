@@ -49,11 +49,11 @@ const HeroSection = ({ applyLink, slideShow }) => {
 
       <HangingCard />
    
-      <BlueTechWave />
+      {/* <BlueTechWave /> */}
       {/* Overlay content */}
       <div className="absolute inset-0 z-20 flex flex-col items-center justify-center text-center text-white px-4">
        <FadeUp>
-         <h1 className="font-bold text-[2.986rem] leading-tight">
+         <h1 className="font-bold lg:text-[3.986rem] leading-tight text-[1.986rem]">
           Empower your innovation <br />
           with Techno Innovation Challenge <br />
           Cambodia
@@ -66,16 +66,16 @@ const HeroSection = ({ applyLink, slideShow }) => {
         </p>
        </FadeUp>
         <div className="flex gap-6 mt-10">
-          <Fade>
+          <FadeUp>
             <button className="px-4 py-3 border border-white rounded-sm">
             <a href="#section2">Learn more</a>
           </button>
-          </Fade>
+          </FadeUp>
 
           {applyLink?.enabled && (
-           <Fade>
+           <FadeUp>
             <ApplyButton link={'/application'}/>
-           </Fade>
+           </FadeUp>
           )}
         </div>
       </div>

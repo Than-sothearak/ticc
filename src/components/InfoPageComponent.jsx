@@ -8,7 +8,7 @@ import StaggerSection from "./motion/StaggerSection";
 import { motion } from "framer-motion";
 import { ApplyButton } from "./ApplyButton";
 
-export const InfoPageComponent = ({ information,applyLink }) => {
+export const InfoPageComponent = ({ information, applyLink }) => {
   function formatDate(date) {
     if (!date) return "";
 
@@ -26,7 +26,7 @@ export const InfoPageComponent = ({ information,applyLink }) => {
     <div className="mx-auto space-y-16 w-full">
       <div className="max-w-full h-[428px] flex justify-center relative">
         <div className="w-full text-white h-full m-auto grid bg-cover bg-no-repeat bg-[url('/images/IMG_2718.JPG')]">
-          <div className="container backdrop-blur-sm mx-auto absolute z-1 bottom-20 left-0 right-0">
+          <div className="container backdrop-blur-sm mx-auto absolute z-1 bottom-20 left-0 right-0 lg:px-14">
             <motion.div
               initial={{ opacity: 0, y: 50 }} // Initial animation properties
               animate={{ opacity: 1, y: 0 }} // Animation properties to animate to
@@ -46,33 +46,30 @@ export const InfoPageComponent = ({ information,applyLink }) => {
         </div>
       </div>
       <FadeUp loop={true}>
-        <div className="px-2 flex flex-col gap-4 justify-center">
-   {information.poster && 
-           information.poster.map(item => (
-            
-               <div key={item}
-            className="container bg-black w-full relative"
-            style={{ aspectRatio: "16/9" }}
-          >{item.poster}
-            <Image
-              src={item}
-              alt="Competition Process Image"
-              fill // use actual image height
-              className="object-cover"
-            />
-          </div>
-           ))
-   }
-
-
+        <div className="px-2 flex flex-col gap-4 justify-center lg:px-14">
+          {information.poster &&
+            information.poster.map((item) => (
+              <div
+                key={item}
+                className="container bg-black w-full relative "
+                style={{ aspectRatio: "16/9" }}
+              >
+                {item.poster}
+                <Image
+                  src={item}
+                  alt="Competition Process Image"
+                  fill // use actual image height
+                  className="object-cover"
+                />
+              </div>
+            ))}
         </div>
       </FadeUp>
 
- 
       {/* Schedule */}
       <div className="w-full bg-gray-100 py-16">
         <FadeUp variants={staggerItem}>
-          <section className="space-y-4  container text-start my-16">
+          <section className="space-y-4  container text-start my-16 lg:px-14">
             <h2 className="font-bold text-[2.986rem] leading-tight mb-4">
               4-Week Program & Schedule
             </h2>
@@ -97,16 +94,14 @@ export const InfoPageComponent = ({ information,applyLink }) => {
               </FadeUp>
             )}
           </section>
-
         </FadeUp>
-        <div className="container m-auto flex justify-start">
-                               {applyLink?.enabled && 
-      <ApplyButton link={applyLink?.src} />}
+        <div className="container m-auto flex justify-start lg:px-14">
+          {applyLink?.enabled && <ApplyButton link={applyLink?.src} />}
         </div>
       </div>
       {/* Competition Process */}
       <FadeUp className="bg-b">
-        <p className="container">
+        <p className="container lg:px-14">
           Techno Innovation Challenge will challenge you to put your theory into
           practice solving real world problems and apply your skills and
           knowledge to build something amazing. During the competition, you will
@@ -115,7 +110,7 @@ export const InfoPageComponent = ({ information,applyLink }) => {
         </p>
       </FadeUp>
       <section className="flex flex-col items-start gap-6 mt-16 w-full bg-gray-100">
-        <div className=" container text-start my-16">
+        <div className=" container text-start my-16 lg:px-14">
           <FadeUp variants={staggerItem}>
             <h2 className="font-bold text-[2.986rem] leading-tight mb-4">
               Competition Process
@@ -129,7 +124,7 @@ export const InfoPageComponent = ({ information,applyLink }) => {
           </FadeUp>
         </div>
       </section>
-      <div className="container flex max-lg:flex-wrap gap-6 ">
+      <div className="container flex max-lg:flex-wrap gap-6 lg:px-14">
         <FadeUp variants={staggerItem} className="w-full">
           <div className="relative h-full w-full">
             <Image
@@ -141,7 +136,7 @@ export const InfoPageComponent = ({ information,applyLink }) => {
             />
           </div>
         </FadeUp>
-        <FadeUp className="w-full">
+        <FadeUp className="w-full ">
           <ProcessDiagram />
         </FadeUp>
       </div>

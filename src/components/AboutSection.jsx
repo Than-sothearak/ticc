@@ -18,15 +18,16 @@ const AboutSection = () => {
           <Image
             src="/images/IMG_2504.JPG"
             width={1200}
-            height={100}
+            height={400}
             alt="TICC Event"
-            className="w-full h-[720px] object-cover lg:p-10 p-0"
+            className="w-full lg:h-[720px] object-cover py-4"
           />
         </FadeUp>
 
         {/* Text */}
-        <StaggerSection>
-          <FadeUp className="container lg:p-10 py-4">
+       <div className="lg:container lg:p-10 py-4 w-full">
+         <StaggerSection>
+          <FadeUp className="">
             <FadeUp>
               <h1 className="font-bold text-[2.986rem] leading-tight">
                 Techno Innovation Challenge Cambodia
@@ -99,6 +100,7 @@ effort.
             </motion.ul>
           </FadeUp>
         </StaggerSection>
+       </div>
       </div>
 
       {/* ===== SECTION 2 ===== */}
@@ -169,7 +171,7 @@ they are capable of developing complete solutions.</li>
             width={1200}
             height={400}
             alt="TICC Pitching"
-            className="w-full h-[720px] object-cover lg:p-10 p-0"
+            className="w-full lg:h-[720px] object-cover lg:p-10 py-4"
           />
         </FadeUp>
       </div>
