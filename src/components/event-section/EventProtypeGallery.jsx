@@ -3,8 +3,8 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
-import StaggerSection from "./motion/StaggerSection";
-import FadeUp from "./motion/FadeUp";
+import StaggerSection from "../motion/StaggerSection";
+import FadeUp from "../motion/FadeUp";
 
 export default function EventPrototypeGallery({ images = [] }) {
   const [openIndex, setOpenIndex] = useState(null);

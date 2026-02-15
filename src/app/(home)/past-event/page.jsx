@@ -1,8 +1,8 @@
 import React from "react";
 
-import { EventsComponent } from "@/components/EventsComponent";
 import { connectDb } from "@/lib/connectDb";
 import { Event } from "@/models/Event";
+import { EventsComponent } from "@/components/event-section/EventsComponent";
 
 
 

@@ -11,6 +11,9 @@ const page = () => {
   return (
     <div className="w-full">
       <div className="max-w-full h-[428px] flex justify-center relative">
+         <div className="absolute inset-0 pointer-events-none">
+          <div className="w-full h-full bg-gradient-to-b from-black/50 via-black/50 to-transparent"></div>
+        </div>
         <div className="w-full text-white h-full m-auto grid bg-cover bg-no-repeat bg-[url('/images/IMG_2743.JPG')]">
           <div className="container mx-auto backdrop-blur-sm absolute z-1 bottom-20 left-0 right-0">
             <motion.div

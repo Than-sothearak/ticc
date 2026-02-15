@@ -15,21 +15,21 @@ const swingCardsSmall = [
     rotate: [6, -5, 7],
     duration: 5,
     color: "bg-blue-500",
-    wireHeight: 320,
+    wireHeight: 50,
   },
   {
     label: "TECHNOLOGY",
     rotate: [5, -6, 6],
     duration: 4.5,
     color: "bg-green-400",
-    wireHeight: 100,
+    wireHeight: 340,
   },
   {
     label: "IDEATION",
     rotate: [3, -3, 4],
     duration: 4.2,
     color: "bg-purple-500",
-    wireHeight: 490,
+    wireHeight: 410,
   },
   {
     label: "AWARDS",
@@ -43,83 +43,28 @@ const swingCardsSmall = [
     rotate: [5, -6, 6],
     duration: 4.5,
     color: "bg-orange-400",
-    wireHeight: 415,
+    wireHeight:120,
   },
 ];
 
-const swingCardsLarge = [
-  {
-    label: "CREATIVITY",
-    rotate: [4, -4, 5],
-    duration: 4,
-    color: "bg-pink-400",
-    wireHeight: 180,
-  },
-  {
-    label: "INNOVATION",
-    rotate: [6, -5, 7],
-    duration: 5,
-    color: "bg-blue-500",
-    wireHeight: 220,
-  },
-  {
-    label: "TECHNOLOGY",
-    rotate: [5, -6, 6],
-    duration: 4.5,
-    color: "bg-green-600",
-    wireHeight: 210,
-  },
-  {
-    label: "IDEATION",
-    rotate: [3, -3, 4],
-    duration: 4.2,
-    color: "bg-purple-500",
-    wireHeight: 220,
-  },
-  {
-    label: "AWARDS",
-    rotate: [7, -6, 5],
-    duration: 5.2,
-    color: "bg-yellow-400",
-    wireHeight: 240,
-  },
-  {
-    label: "BUSINESS",
-    rotate: [5, -6, 6],
-    duration: 4.5,
-    color: "bg-orange-400",
-    wireHeight: 215,
-  },
-];
 
-export const HangingCard = () => {
-  const [isSmallScreen, setIsSmallScreen] = useState(false);
-  useEffect(() => {
-    const handleResize = () => {
-      setIsSmallScreen(window.innerWidth < 1024); // Tailwind lg breakpoint
-    };
-    handleResize(); // initialize
-    window.addEventListener("resize", handleResize);
 
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+export const HangingCardMobile = () => {
 
-  const swingCards = isSmallScreen ? swingCardsSmall : swingCardsLarge;
+  const swingCards = swingCardsSmall
   return (
     <div className="absolute top-0 left-1/2 z-30 w-full max-w-lg -translate-x-1/2 bg-black">
       {/* Hanging Innovation Card */}
       {swingCards.map((item, index) => {
-        const SPACING =
-          typeof window !== "undefined" && window.innerWidth < 1024 ? 90 : 200;
+        const SPACING = 50
         const offset = (index - (swingCards.length - 1) / 2) * SPACING;
         const wireHeight =
           Math.floor(Math.random() * 80) +
-          90 +
-          Math.floor(item.wireHeight / 2);
+          item.wireHeight
         return (
           <div
             key={item.label}
-            className="absolute top-0 left-1/3  z-30 "
+            className="absolute top-0 left-[38%]  z-10 "
             style={{ transform: `translateX(${offset}px)` }}
           >
             {/* Wire */}
@@ -155,7 +100,7 @@ export const HangingCard = () => {
                 },
               }}
             >
-              <h3 className="text-xl font-bold">{item.label}</h3>
+              <h3 className="text-sm font-bold">{item.label}</h3>
             </motion.div>
           </div>
         );

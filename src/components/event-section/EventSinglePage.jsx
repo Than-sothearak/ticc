@@ -1,11 +1,11 @@
 "use client";
 import React from "react";
 import Image from "next/image";
-import { EventGallery } from "./EventGallery";
 import { Calendar, UserCircle } from "lucide-react";
-import StaggerSection from "./motion/StaggerSection";
-import FadeUp from "./motion/FadeUp";
+import StaggerSection from "../motion/StaggerSection";
+import FadeUp from "../motion/FadeUp";
 import EventPrototypeGallery from "./EventProtypeGallery";
+import { EventGallery } from "./EventGallery";
 
 export const EventSinglePage = ({ event }) => {
   return (

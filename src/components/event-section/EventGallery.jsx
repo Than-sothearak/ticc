@@ -3,25 +3,28 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
-import StaggerSection from "./motion/StaggerSection";
-import FadeUp from "./motion/FadeUp";
+import StaggerSection from "../motion/StaggerSection";
+import FadeUp from "../motion/FadeUp";
 
 export const EventGallery = ({ images = [] }) => {
   const [openIndex, setOpenIndex] = useState(null);
 
+  const imagesWithoutFirst = images.slice(1);
+
+const next = () =>
+  setOpenIndex((prev) => (prev + 1) % imagesWithoutFirst.length);
+
+const prev = () =>
+  setOpenIndex((prev) =>
+    prev === 0 ? imagesWithoutFirst.length - 1 : prev - 1
+  );
+
   // Keep your logic
-  const firstSix = images.slice(0, 6);
+  const firstSix = images.slice(1, 6);
   const rest = images.slice(6);
 
   const openImage = (index) => setOpenIndex(index);
   const closeImage = () => setOpenIndex(null);
-
-  const next = () =>
-    setOpenIndex((prev) => (prev + 1) % images.length);
-  const prev = () =>
-    setOpenIndex((prev) =>
-      prev === 0 ? images.length - 1 : prev - 1
-    );
 
   // ESC close
   useEffect(() => {
@@ -123,7 +126,7 @@ export const EventGallery = ({ images = [] }) => {
           {/* Image */}
           <div className="max-w-6xl w-full p-4">
             <Image
-              src={images[openIndex]}
+              src={imagesWithoutFirst[openIndex]}
               alt=""
               width={1800}
               height={1200}

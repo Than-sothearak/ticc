@@ -7,7 +7,7 @@ import VideoHero from "@/components/VideoHero";
 import Navbar from "@/components/navbar/Navbar";
 import { Content } from "@/models/Content";
 import { connectDb } from "@/lib/connectDb";
-import HeroSection from "@/components/HeroSection";
+import HeroSection from "@/components/hero-section/HeroSection";
 import Footer from "@/components/footer/Footer";
 
 const Contact = dynamic(() => import("../components/Contact"), { ssr: false });

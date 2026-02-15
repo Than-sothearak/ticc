@@ -20,8 +20,11 @@ export const MentorComponent = ({ data }) => {
     <div className="w-full">
       <StaggerSection>
         <div className="max-w-full h-[428px] flex justify-center relative">
+           <div className="absolute inset-0 pointer-events-none">
+          <div className="w-full h-full bg-gradient-to-b from-black/50 via-black/50 to-transparent"></div>
+        </div>
           <div className="w-full text-white h-full m-auto grid bg-cover bg-no-repeat bg-[url('/images/IMG_2800.JPG')]">
-            <div className="container  mx-auto absolute z-1 bottom-20 left-0 right-0">
+            <div className="container  mx-auto absolute z-1 bottom-20 left-0 right-0 lg:px-14">
               <motion.div
                 initial={{ opacity: 0, y: 50 }} // Initial animation properties
                 animate={{ opacity: 1, y: 0 }} // Animation properties to animate to
@@ -32,7 +35,7 @@ export const MentorComponent = ({ data }) => {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.2, duration: 1 }}
-                  className="font-bold text-[3.986rem] uppercase leading-tight top-10 w-full backdrop-blur-sm"
+                  className="font-bold md:text-[3.986rem] uppercase leading-tight top-10 text-3xl"
                 >
                   Mentors
                 </motion.span>{" "}
@@ -42,7 +45,7 @@ export const MentorComponent = ({ data }) => {
         </div>
 
         <div className="flex justify-center items-center my-10">
-          <div className="container text-start">
+          <div className="container text-start lg:px-14">
             <FadeUp variants={staggerItem}>
               <h3 className="font-bold">
                 Lecturers, Technical Experts, Researcher, STEM-major Alumni -
@@ -64,7 +67,7 @@ export const MentorComponent = ({ data }) => {
         </div>
 
         <div className="flex justify-center items-center bg-gray-100">
-          <div className="container text-start my-16">
+          <div className="container text-start my-16 lg:px-14">
             <FadeUp variants={staggerItem}>
               <h1 className="font-bold text-[2.986rem] leading-tight">
                 Eligibility for being mentors{" "}
@@ -96,7 +99,7 @@ export const MentorComponent = ({ data }) => {
         </div>
 
         <div className="flex justify-center items-center">
-          <div className="container text-start my-16">
+          <div className="container text-start my-16 lg:px-14">
             <FadeUp>
               <h1 className="font-bold text-[2.986rem] leading-tight">
                 What you will do
@@ -135,7 +138,7 @@ export const MentorComponent = ({ data }) => {
         </div>
 
         <div className="flex justify-center items-center bg-gray-100">
-          <div className="container text-start my-16">
+          <div className="container text-start my-16 lg:px-14">
             <FadeUp>
               <h1 className="font-bold text-[2.986rem] leading-tight">
                 Benefits for being a voluntary mentor
@@ -174,7 +177,7 @@ export const MentorComponent = ({ data }) => {
         </div>
 
         <div className="flex justify-center items-center">
-          <div className="container text-start my-16">
+          <div className="container text-start my-16 lg:px-14">
             <FadeUp>
               <h1 className="font-bold text-[2.986rem] leading-tight">
                 Our mentor
@@ -190,44 +193,39 @@ export const MentorComponent = ({ data }) => {
                   </AccordionTrigger>
                   <AccordionContent>
                     <StaggerSection>
-                      <div className="w-full grid grid-cols-2 max-sm:grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                      <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-4 gap-6">
                         {item.mentors.map((i) => (
-                          <div key={i._id}>
+                          <div key={i._id} className="h-full flex flex-col">
                             <FadeUp loop={true}>
-                              <Card className="h-full flex flex-col rounded-xl shadow-lg overflow-hidden bg-gradient-to-b from-blue-600 via-indigo-600 to-purple-600 text-white">
-                                {/* Event Name Banner */}
-                                <div className="bg-gray-50 p-3 text-center">
-                                  <h2 className="text-lg font-extrabold uppercase text-primary text-start">
-                                    Techno <br />Innovation Challenge <br />Cambodia {item._id}
-                                  </h2>
-                                  <p className="mt-1 text-sm font-semibold text-white/90">
-                                    {i.year}
-                                  </p>
-                                </div>
+                              <div className="sm:h-80 h-full flex flex-col shadow-lg overflow-hidden bg-gradient-to-b from-blue-600 via-indigo-600 to-purple-600 text-white">
+                           
 
                                 {/* Mentor Image */}
-                                <div className="relative h-96 w-full">
+                                <div className="relative h-full w-full">
                                   <Image
                                     src={i.image}
                                     alt={i.name}
-                                    fill
-                                    className="object-cover object-top"
+                                    width={800}
+                                    height={300}
+                                    className="object-cover t-top w-full h-full"
                                   />
                                   <div className="absolute inset-0 bg-black/0" />{" "}
                                   {/* overlay for readability */}
                                 </div>
 
-                                {/* Mentor Info */}
-                                <CardContent className="flex-1 flex flex-col justify-end p-4 bg-primary">
-                                  <h3 className="font-bold text-white">
+                         
+                              </div>
+                            </FadeUp>
+
+                                   {/* Mentor Info */}
+                                <CardContent className="flex-1 flex flex-col justify-end p-4">
+                                  <h3 className="font-bold text-primary text-center text-lg" >
                                     {i.name}
                                   </h3>
-                                  <p className="mt-1 text-sm text-gray-200 line-clamp-2">
+                                  <p className="text-center mt-1 text-sm text-gray-900 line-clamp-2">
                                     {i.title}
                                   </p>
                                 </CardContent>
-                              </Card>
-                            </FadeUp>
                           </div>
                         ))}
                       </div>

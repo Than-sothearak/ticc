@@ -31,14 +31,14 @@ const Navbar = () => {
   return (
     <nav
       className={`fixed top-0 z-50 w-full transition-all duration-300 ${
-        scrolled ? "bg-white shadow-md" : "bg-transparent"
+        scrolled || isMobileOpen ? "bg-white shadow-md" : "bg-transparent"
       }`}
     >
       <div className="w-full mx-auto flex items-center justify-between h-20 px-6 lg:px-16">
         {/* Logo */}
         <Link href="/" className="flex items-center">
           <Image
-            src={scrolled ? "/images/logo.png" : "/images/TICC_logo_white.png"}
+            src={scrolled || isMobileOpen ? "/images/logo.png" : "/images/TICC_logo_white.png"}
             alt="Logo"
             width={168}
             height={50}
@@ -48,7 +48,7 @@ const Navbar = () => {
         {/* Desktop Links */}
         <div
           className={`hidden lg:flex items-center gap-8 uppercase font-semibold ${
-            scrolled ? "text-black" : "text-white"
+            scrolled || isMobileOpen ? "text-black" : "text-white"
           }`}
         >
           {links.map((link) => {
@@ -72,7 +72,7 @@ const Navbar = () => {
         <div className="lg:hidden">
           <button
             onClick={() => setIsMobileOpen((prev) => !prev)}
-            className={`${scrolled ? "text-black" : "text-white"}`}
+            className={`${scrolled || isMobileOpen ? "text-black" : "text-white"}`}
           >
             {isMobileOpen ? <MdClose size={28} /> : <MdMenu size={28} />}
           </button>

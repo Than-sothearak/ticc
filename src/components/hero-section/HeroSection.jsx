@@ -2,10 +2,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { HangingCard } from "./HangingCard";
-import { BlueTechWave } from "./WaveTech";
-import FadeUp from "./motion/FadeUp";
-import Fade from "./motion/Fade";
-import { ApplyButton } from "./ApplyButton";
+import { BlueTechWave } from "../WaveTech";
+import FadeUp from "../motion/FadeUp";
+import Fade from "../motion/Fade";
+import { ApplyButton } from "../ApplyButton";
+import { HangingCardMobile } from "./HangingCardMobile";
 
 const HeroSection = ({ applyLink, slideShow }) => {
   const slides = slideShow.images || [];
@@ -47,7 +48,13 @@ const HeroSection = ({ applyLink, slideShow }) => {
         ))}
       </div>
 
-      <HangingCard />
+     <div className="max-md:hidden">
+       <HangingCard />
+     
+     </div>
+     <div className="md:hidden">
+       <HangingCardMobile />
+     </div>
    
       {/* <BlueTechWave /> */}
       {/* Overlay content */}
