@@ -102,6 +102,7 @@ export async function PUT(req) {
       content.slide_show?.images.filter(
         (img) => !getRemovedImages.includes(img),
       ) || [];
+      
     // Remove deleted images from S3
     if (getRemovedImages.length > 0) {
       for (const img of getRemovedImages) {
