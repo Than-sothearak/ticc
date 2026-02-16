@@ -36,6 +36,7 @@ export async function PUT(req) {
     const imageFiles = formData.getAll("images") || [];
 
     const getRemovedImages = removedImages.map((i) => i.url);
+    const imagesOrder = JSON.parse(formData.get("imagesOrder") || "[]");
 
     // Remove deleted images
     let updateImage =
@@ -48,14 +49,23 @@ export async function PUT(req) {
       }
     }
     // Upload new images to S3
-    const uploadPromises = imageFiles
-      .filter((file) => file.size > 0)
-      .map((file) => uploadFileToS3(file));
+     if (imageFiles && imageFiles.length > 0) {
+    for (const imageFile of imageFiles) {
+      if (imageFile.size > 0) {
+        const imageUrl = await uploadFileToS3(imageFile);
+        updateImage.push(imageUrl);
+        console.log("Image uploaded to S3:", imageUrl);
+      }
+    }
+    console.log(
+      "-----------------------------------------------------------------------------------------------------------------------------"
+    );
+    console.log(
+      `Total file ${imageFiles.length} uploaded to S3 successfully`
+    );
+  }
 
-    const uploadedUrls = await Promise.all(uploadPromises);
-    updateImage.push(...uploadedUrls);
 
-    const imagesOrder = JSON.parse(formData.get("imagesOrder") || "[]");
 
     // Only reorder if imagesOrder is valid
     if (imagesOrder.length > 0) {
