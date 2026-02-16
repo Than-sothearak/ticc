@@ -66,7 +66,7 @@ const prev = () =>
           {/* Remaining images: 2-column grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {rest.map((img, i) => {
-              const realIndex = i + 6; // correct index in full array
+              const realIndex = i + 5; // correct index in full array
               return (
                 <FadeUp loop key={realIndex}>
                   <div

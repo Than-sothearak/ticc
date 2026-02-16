@@ -52,13 +52,7 @@ export async function PUT(req) {
   
     const uploadedUrls = await Promise.all(uploadPromises);
     updateImage.push(...uploadedUrls);
-    // Upload new images to S3
-    for (const file of imageFiles) {
-      if (file.size > 0) {
-        const url = await uploadFileToS3(file);
-        updateImage.push(url);
-      }
-    }
+
       const imagesOrder = JSON.parse(formData.get("imagesOrder") || "[]");
        if (imagesOrder.length > 0) {
       const orderedUrls = imagesOrder.map((img) => img.url);
@@ -69,7 +63,6 @@ export async function PUT(req) {
           orderedUrls.push(img);
         }
       }
-
       event.prototypes = orderedUrls;
     } else {
       event.prototypes = updateImage;

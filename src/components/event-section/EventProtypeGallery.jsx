@@ -48,7 +48,7 @@ export default function EventPrototypeGallery({ images = [] }) {
                 {/* Overlay */}
                 <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
                   <span className="text-white text-lg font-semibold">
-                    View Image
+                    View
                   </span>
                 </div>
               </div>

@@ -7,7 +7,7 @@ import React from "react";
 const singleEventPage = async ({ params }) => {
   await connectDb();
   const event = await Event.findById({ _id: params.id }).lean();
-  const pastEvents = await Event.find().limit(5).sort({createdAt: -1}).lean();
+  const pastEvents = await Event.find().limit(6).sort({createdAt: -1}).lean();
 
   return (
     <div className="w-full">

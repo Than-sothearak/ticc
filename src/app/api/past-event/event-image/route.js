@@ -60,7 +60,6 @@ export async function PUT(req) {
     // Only reorder if imagesOrder is valid
     if (imagesOrder.length > 0) {
       const orderedUrls = imagesOrder.map((img) => img.url);
-
       // Add new images that are NOT in order list
       for (const img of updateImage) {
         if (!orderedUrls.includes(img)) {

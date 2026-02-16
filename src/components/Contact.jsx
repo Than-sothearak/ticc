@@ -74,7 +74,7 @@ const Contact = () => {
                 width="100%"
                 height="350"
                 loading="lazy"
-                className="grayscale hover:grayscale-0 transition"
+                className=" transition"
                 src="https://maps.google.com/maps?width=100%25&height=600&hl=en&q=Institute%20of%20Technology%20of%20Cambodia&z=15&output=embed"
               />
             </div>
