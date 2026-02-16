@@ -61,26 +61,44 @@ export async function PUT(req) {
     }
     const removedImages = JSON.parse(formData.get("removedImages") || "[]");
     const imageFiles = formData.getAll("images") || [];
+    const getRemovedImages = removedImages.map((i) => i.url); //Put image link to array only
+        const imagesOrder = JSON.parse(formData.get("imagesOrder") || "[]");
+
 
     // Remove deleted images
     let updatedLogos = partner.logos.filter(
-      (logo) => !removedImages.includes(logo)
+      (logo) => !getRemovedImages .includes(logo)
     );
       // Remove deleted images from S3
-    if (removedImages.length > 0) {
-      for (const img of removedImages) {
+    if (getRemovedImages .length > 0) {
+      for (const img of getRemovedImages ) {
         const key = img.split("/").pop();
         if (key) await deleteFileFromS3(key);
       }
     }
     // Upload new images to S3
-    for (const file of imageFiles) {
-      if (file.size > 0) {
-        const url = await uploadFileToS3(file);
-        updatedLogos.push(url);
-      }
-    }
+      const uploadPromises = imageFiles
+          .filter((file) => file.size > 0)
+          .map((file) => uploadFileToS3(file));
+    
+    const uploadedUrls = await Promise.all(uploadPromises);
+    updatedLogos.push(...uploadedUrls);
     partner.logos = updatedLogos;
+     
+      if (imagesOrder.length > 0) {
+      const orderedUrls = imagesOrder.map((img) => img.url);
+      // Add new images that are NOT in order list
+      for (const img of updatedLogos) {
+        if (!orderedUrls.includes(img)) {
+          orderedUrls.push(img);
+        }
+      }
+      partner.logos = orderedUrls;
+    } else {
+      partner.logos = updatedLogos;
+    }
+
+
     await partner.save();
     return NextResponse.json({
       success: true,

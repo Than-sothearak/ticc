@@ -7,17 +7,16 @@ import { getServerSession } from "next-auth";
 import { Admin } from "@/models/Admin";
 
 export async function PUT(req) {
-    await connectDb();
-      const session = await getServerSession(authOptions);
-      const isAdmin = await Admin.findOne({ email: session?.user?.email });
-      if (!isAdmin) {
-          return NextResponse.json(
-              { success: false, message: "Access denied" },
-              { status: 403 },
-          );
-      }
+  await connectDb();
+  const session = await getServerSession(authOptions);
+  const isAdmin = await Admin.findOne({ email: session?.user?.email });
+  if (!isAdmin) {
+    return NextResponse.json(
+      { success: false, message: "Access denied" },
+      { status: 403 },
+    );
+  }
   try {
-
     const formData = await req.formData();
     const id = formData.get("_id");
     if (!id) {
@@ -35,32 +34,48 @@ export async function PUT(req) {
     }
     const removedImages = JSON.parse(formData.get("removedImages") || "[]");
     const imageFiles = formData.getAll("images") || [];
-    
-  
+    const getRemovedImages = removedImages.map((i) => i.url); //Put image link to array only
+    const imagesOrder = JSON.parse(formData.get("imagesOrder") || "[]");
+   
     // Remove deleted images
-    let updatePoster = content.information.poster.filter(
-      (img) => !removedImages.includes(img),
-    ) || [];
+    let updatePoster =
+      content.information.poster.filter(
+        (img) => !getRemovedImages.includes(img),
+      ) || [];
     // Remove deleted images from S3
-    if (removedImages.length > 0) {
-      for (const img of removedImages) {
+    if (getRemovedImages.length > 0) {
+      for (const img of getRemovedImages) {
         const key = img.split("/").pop();
         if (key) await deleteFileFromS3(key);
       }
     }
     // Upload new images to S3
-    for (const file of imageFiles) {
-      if (file.size > 0) {
-        const url = await uploadFileToS3(file);
-        updatePoster.push(url);
+    const uploadPromises = imageFiles
+      .filter((file) => file.size > 0)
+      .map((file) => uploadFileToS3(file));
+
+    const uploadedUrls = await Promise.all(uploadPromises);
+    updatePoster.push(...uploadedUrls);
+
+
+        // Only reorder if imagesOrder is valid
+    if (imagesOrder.length > 0) {
+      const orderedUrls = imagesOrder.map((img) => img.url);
+      // Add new images that are NOT in order list
+      for (const img of updatePoster) {
+        if (!orderedUrls.includes(img)) {
+          orderedUrls.push(img);
+        }
       }
+     content.information.poster = orderedUrls;
+    } else {
+      content.information.poster = updatePoster;
     }
-    content.information.poster = updatePoster;
     await content.save();
     return NextResponse.json({
       success: true,
       content,
-      message: "Saved",
+      message: "Saved successfully",
     });
   } catch (err) {
     return NextResponse.json(
