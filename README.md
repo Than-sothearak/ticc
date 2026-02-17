@@ -17,25 +17,25 @@ You can start editing the page by modifying `app/page.js`. The page auto-updates
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
 ## ENV 
-## GOOGLE AUTH ADMIN LOGIN 
+//GOOGLE AUTH ADMIN LOGIN 
 GOOGLE_ID=
 GOOGLE_SECRET=
 
-## DATA BASE URL MONGODB
+//DATA BASE URL MONGODB
 MONGODB_URI=
 
-## AWS S3 IAM USER AND BUCKET FOR STORE IMAGES
+//AWS S3 IAM USER AND BUCKET FOR STORE IMAGES
 S3_ACCESS_KEY=
 S3_SECRET_ACCESS_KEY=
 S3_BUCKET_NAME=
 
-## NEXT AUTH
+//NEXT AUTH
 NEXTAUTH_URL =http://localhost:3000/
 AUTH_TRUST_HOST="true"
 AUTH_SECRET=
 
 
-## DATABASE MODEL IMAGE VIEW 
+//DATABASE MODEL IMAGE VIEW 
 https://drive.google.com/file/d/1s7S75-GDunPzEvLOUfOdvNTi9GFYan1W/view?usp=sharing
 ## DATABASE JSON
 {
