@@ -67,7 +67,7 @@ export function AppSidebar({ session }) {
 
               return (
                 <SidebarMenuItem key={`parent-${index}`}>
-                  <Collapsible defaultOpen={isParentActive}>
+                  <Collapsible defaultOpen={isParentActive} className=" overflow-hidden">
                     <CollapsibleTrigger asChild>
                       <SidebarMenuButton className="group flex items-center justify-between w-full px-4 py-2 rounded">
                         <span className="flex items-center">
@@ -79,8 +79,8 @@ export function AppSidebar({ session }) {
                     </CollapsibleTrigger>
 
                     <CollapsibleContent>
-                      {/* ✅ MUST be SidebarMenu, NOT div */}
-                      <SidebarMenu className="ml-6 mt-1">
+            
+                      <SidebarMenu className="ml-6 mt-1 ">
                         {link.sublink.map((sub) => {
                           const subBasePath = sub.path
                             .split("/")
@@ -178,7 +178,7 @@ export function AppSidebar({ session }) {
       <SidebarFooter>
         {renderNavigation(userNavigation)}
         <Profile session={session} />
-        <p className="text-sm text-gray-500 text-center">© 2026 My App</p>
+        <p className="text-sm text-gray-500 text-center">© 2026 TICC</p>
         {isMobile && <p className="text-xs text-gray-400 mt-1">Mobile view</p>}
       </SidebarFooter>
     </Sidebar>

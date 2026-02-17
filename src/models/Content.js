@@ -22,14 +22,6 @@ const ContentSchema = new Schema({
     },
   },
 
-  specialPromotion: {
-    title: String,
-    description: String,
-    banner: String,
-    deadline: Date,
-    promoCode: String,
-    enabled: Boolean,
-  },
 });
 
 export const Content = models.Content || model("Content", ContentSchema);

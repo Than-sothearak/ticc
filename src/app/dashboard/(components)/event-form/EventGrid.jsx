@@ -30,7 +30,7 @@ export const EventGrid = ({ events }) => {
               <div className="relative h-full w-full border rounded-lg overflow-hidden group">
                 <Image
                 
-                  src={e?.images[0] || "/images/IMG_8244.JPG"}
+                  src={e?.images[0] || "/images/Image-not-found.png"}
                   alt={e.title}
                      height={192}
                  width={192}

@@ -36,7 +36,7 @@ export async function PUT(req) {
     const imageFiles = formData.getAll("images") || [];
 
     const getRemovedImages = removedImages.map((i) => i.url);
-
+    const imagesOrder = JSON.parse(formData.get("imagesOrder") || "[]");
   
     let updateImage = event.prototypes.filter((img) => !getRemovedImages.includes(img)) || [];
     if (getRemovedImages.length > 0) {
@@ -53,7 +53,7 @@ export async function PUT(req) {
     const uploadedUrls = await Promise.all(uploadPromises);
     updateImage.push(...uploadedUrls);
 
-      const imagesOrder = JSON.parse(formData.get("imagesOrder") || "[]");
+   
        if (imagesOrder.length > 0) {
       const orderedUrls = imagesOrder.map((img) => img.url);
 
