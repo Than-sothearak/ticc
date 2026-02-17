@@ -3,6 +3,9 @@ import React from "react";
 import { InfoPageComponent } from "@/components/InfoPageComponent";
 import { connectDb } from "@/lib/connectDb";
 import { Content } from "@/models/Content";
+
+export const revalidate = 60
+
 const page = async () => {
   await connectDb();
   const data = await Content.findOne()

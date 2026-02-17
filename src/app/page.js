@@ -11,7 +11,7 @@ import HeroSection from "@/components/hero-section/HeroSection";
 import Footer from "@/components/footer/Footer";
 
 const Contact = dynamic(() => import("../components/Contact"), { ssr: false });
-
+export const revalidate = 60
 export default async function Home() {
   await connectDb()
   const data = await Content.findOne()

@@ -4,6 +4,8 @@ import { connectDb } from "@/lib/connectDb";
 import { Event } from "@/models/Event";
 import Link from "next/link";
 import React from "react";
+export const revalidate = 60
+
 const singleEventPage = async ({ params }) => {
   await connectDb();
   const event = await Event.findById({ _id: params.id }).lean();

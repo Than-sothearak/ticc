@@ -3,6 +3,8 @@ import { connectDb } from '@/lib/connectDb'
 import { Mentor } from '@/models/Mentor'
 import React from 'react'
 
+export const revalidate = 60
+
 const mentorPage = async () => {
   await connectDb()
     const mentorsByYear = await Mentor.aggregate([
