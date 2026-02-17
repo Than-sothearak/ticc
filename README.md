@@ -17,14 +17,14 @@ You can start editing the page by modifying `app/page.js`. The page auto-updates
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
 ## ENV 
-## GOOGLE AUTH
+## GOOGLE AUTH ADMIN LOGIN 
 GOOGLE_ID=
 GOOGLE_SECRET=
 
 ## DATA BASE URL MONGODB
 MONGODB_URI=
 
-## AWS S3 IAM USER AND BUCKET
+## AWS S3 IAM USER AND BUCKET FOR STORE IMAGES
 S3_ACCESS_KEY=
 S3_SECRET_ACCESS_KEY=
 S3_BUCKET_NAME=
