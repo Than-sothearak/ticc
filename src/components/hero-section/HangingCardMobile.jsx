@@ -49,17 +49,18 @@ const swingCardsSmall = [
 
 
 
-export const HangingCardMobile = () => {
+export const HangingCardMobile = ({showVideo}) => {
 
   const swingCards = swingCardsSmall
   return (
     <div className="absolute top-0 left-1/2 z-30 w-full max-w-lg -translate-x-1/2 bg-black">
       {/* Hanging Innovation Card */}
       {swingCards.map((item, index) => {
+        const num = showVideo ? 0 :80; // If showVideo is true, set num to 0 to prevent swinging
         const SPACING = 50
         const offset = (index - (swingCards.length - 1) / 2) * SPACING;
         const wireHeight =
-          Math.floor(Math.random() * 80) +
+          Math.floor(Math.random() * num) +
           item.wireHeight
         return (
           <div

@@ -48,18 +48,19 @@ const swingCardsLarge = [
   },
 ];
 
-export const HangingCard = () => {
+export const HangingCard = ({showVideo}) => {
 
   return (
     <div className="absolute top-0 left-1/2 z-30 w-full max-w-lg -translate-x-1/2 bg-black">
       {/* Hanging Innovation Card */}
       {swingCardsLarge.map((item, index) => {
+        const num = showVideo ? 5 :80; // If showVideo is true, set num to 0 to prevent swinging
         const SPACING =
           typeof window !== "undefined" && window.innerWidth < 1024 ? 130 : 200;
         const offset = (index - (swingCardsLarge.length - 1) / 2) * SPACING;
         const wireHeight =
-          Math.floor(Math.random() * 80) +
-          90 +
+          Math.floor(Math.random() * num) +
+          num +
           Math.floor(item.wireHeight / 2);
         return (
           <div

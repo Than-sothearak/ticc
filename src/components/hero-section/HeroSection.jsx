@@ -8,16 +8,17 @@ import Link from "next/link";
 import { Play } from "lucide-react";
 import { getYouTubeID } from "@/lib/getYoutubeID";
 
-
 const HeroSection = ({ applyLink, slideShow }) => {
   const slides = slideShow.images || [];
 
-
-const url = slideShow.videoLink || "";
+  const url = slideShow.videoLink || "";
   const videoId = getYouTubeID(url); // Replace with your actual video URL
 
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [showVideo, setShowVideo] = useState(slideShow.videoLink === "" ? false : true);
+  const [showVideo, setShowVideo] = useState(
+    slideShow.videoLink === "" ? true : false,
+  );
+  const [isShowing, setIsShowing] = useState(true);
   const containerRef = useRef(null);
   // Auto slideshow
   useEffect(() => {
@@ -31,10 +32,21 @@ const url = slideShow.videoLink || "";
 
   const displaySlides = [...slides, slides[0]];
 
+  const handlePlayVideo = () => {
+    setShowVideo(!showVideo);
+    if (showVideo) {
+      setIsShowing(true);
+    } else {
+      setIsShowing(false);
+    }
+  };
+
   return (
     <div className="relative w-full  h-screen overflow-hidden">
       {/* Gradient overlay */}
-      <div className="absolute inset-0 z-10 bg-gradient-to-b from-black/60 via-black/40 to-transparent pointer-events-none" />
+      <div
+        className={`absolute inset-0 z-10 bg-gradient-to-b ${!showVideo ? "from-black/80 via-black/40" : "from-black/10 via-black/0"}  to-transparent pointer-events-none`}
+      />
 
       {/* ================= SLIDESHOW ================= */}
       {!showVideo && (
@@ -67,57 +79,85 @@ const url = slideShow.videoLink || "";
 
       {/* Cards */}
       <div className="max-md:hidden">
-        <HangingCard />
+        <HangingCard showVideo={showVideo} />
       </div>
-      <div className="md:hidden">
-        <HangingCardMobile />
+      <div className={`md:hidden ${showVideo ? 'opacity-0' : 'opacity-100'} transition-opacity duration-1000`}>
+        <HangingCardMobile showVideo={showVideo} />
       </div>
 
       {/* Overlay Content */}
-      <div className="absolute inset-0 z-20 flex flex-col items-center justify-center text-center text-white px-4">
-        <FadeUp>
-          <h1 className="font-bold lg:text-[3.986rem] leading-tight text-[1.986rem]">
-            Empower your innovation <br />
-            with Techno Innovation Challenge <br />
-            Cambodia
-          </h1>
-        </FadeUp>
-
-        <FadeUp>
-          <p className="mt-4 text-lg max-w-xl">
-            {" "}
-            Join our competition program and showcase your STEM-based solutions
-            to solve real-world problems. Learn, compete, and win!{" "}
-          </p>
-        </FadeUp>
-
-        <div className="flex gap-6 mt-10 items-center">
-          <FadeUp>
-            <Link
-              href="#section2"
-              className="px-4 py-3 border border-white rounded-sm h-full w-full"
-            >
-              Learn more
-            </Link>
-          
-          </FadeUp>
-
-          {applyLink?.enabled && (
+      <div
+        className={`absolute inset-0 z-20 flex flex-col items-center justify-center text-center text-white px-4 `}
+      >
+        <div className={`flex justify-center items-center flex-col ${showVideo ? 
+          'lg:p-10' : ''
+        }`}
+            onMouseEnter={() => {
+              if (showVideo) setIsShowing(true);
+            }}
+            onMouseLeave={() => {
+              if (showVideo) setIsShowing(false);
+            }}
+        >
+          <div
+            className={`${showVideo ? "-translate-y-48 opacity-0" : "translate-y-0 opacity-100"} transition-all duration-1000 text-center flex flex-col items-center justify-center`}
+        
+          >
             <FadeUp>
-              <ApplyButton link="/application" />
+              <h1 className="font-bold lg:text-[3.986rem] leading-tight text-[1.986rem]">
+                Empower your innovation <br />
+                with Techno Innovation Challenge <br />
+                Cambodia
+              </h1>
             </FadeUp>
+
+            <FadeUp>
+              <p className="mt-4 text-lg max-w-xl">
+                Join our competition program and showcase your STEM-based
+                solutions to solve real-world problems. Learn, compete, and win!
+              </p>
+            </FadeUp>
+          </div>
+
+          {isShowing && (
+            <div className="flex gap-6 items-center  mt-8 ">
+              <FadeUp>
+                <Link
+                  href="#section2"
+                  className="px-4 py-3 border border-white rounded-sm h-full w-full"
+                >
+                  Learn more
+                </Link>
+              </FadeUp>
+
+              {applyLink?.enabled && (
+                <FadeUp>
+                  <ApplyButton link="/application" />
+                </FadeUp>
+              )}
+            </div>
           )}
         </div>
         {/* 🎥 Play Video Button */}
         {videoId && (
-          <FadeUp className="absolute bottom-10">
+          <div className="absolute bottom-10">
             <button
-              onClick={() => setShowVideo(!showVideo)}
-              className="flex flex-col  justify-center  items-center px-5 py-3 bg-white/40 text-black font-semibold rounded-md hover:bg-gray-200 duration-700 ease-in-out hover:scale-105 transition-all"
+              onClick={() => handlePlayVideo()}
+              className="flex flex-col  justify-center  items-center px-5 py-3 bg-white/90 text-black font-semibold rounded-md hover:bg-gray-200 duration-700 ease-in-out hover:scale-105 transition-all"
             >
-              {showVideo ? <div className="flex items-center gap-2"><Play size={28} />Slide show</div> : <div className="flex items-center gap-2"><Play size={28} />Play video</div>}
+              {showVideo ? (
+                <div className="flex items-center gap-2">
+                  <Play size={28} />
+                  Slide show
+                </div>
+              ) : (
+                <div className="flex items-center gap-2">
+                  <Play size={28} />
+                  Play video
+                </div>
+              )}
             </button>
-          </FadeUp>
+          </div>
         )}
       </div>
     </div>
