@@ -46,13 +46,7 @@ const pastEvents = [
 export const EventsComponent = ({ events }) => {
   return (
     <div className="w-full">
-      {/* Hero Section */}
-      <HeaderSectionComponent
-        title={"Past Events"}
-        image="/images/IMG_7740.JPG"
-        position="center"
-      />
-
+  
       {/* Events Section */}
       <div className="container mx-auto max-w-5xl py-6 px-4">
         <h2 className="font-bold text-4xl mb-10">Past event</h2>

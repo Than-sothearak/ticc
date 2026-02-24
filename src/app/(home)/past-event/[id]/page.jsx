@@ -14,12 +14,7 @@ const singleEventPage = async ({ params }) => {
   return (
     <div className="w-full">
      
-      <HeaderSectionComponent
-        title={"Past Events"}
-        link={"/past-event"}
-        image="/images/IMG_7740.JPG"
-        position="center"
-      />
+    
       <EventSinglePage event={JSON.parse(JSON.stringify(event))} />
       <RelatedEvents
         events={JSON.parse(JSON.stringify(pastEvents))}
