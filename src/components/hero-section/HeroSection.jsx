@@ -19,7 +19,6 @@ const url = slideShow.videoLink || "";
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showVideo, setShowVideo] = useState(slideShow.videoLink === "" ? false : true);
   const containerRef = useRef(null);
-  console.log(slideShow.videoLink === "" ? false : true)
   // Auto slideshow
   useEffect(() => {
     if (showVideo || slides.length === 0) return;
@@ -33,7 +32,7 @@ const url = slideShow.videoLink || "";
   const displaySlides = [...slides, slides[0]];
 
   return (
-    <div className="relative w-full max-2xl:h-[60vh]  h-screen overflow-hidden">
+    <div className="relative w-full  h-screen overflow-hidden">
       {/* Gradient overlay */}
       <div className="absolute inset-0 z-10 bg-gradient-to-b from-black/60 via-black/40 to-transparent pointer-events-none" />
 
@@ -56,9 +55,9 @@ const url = slideShow.videoLink || "";
 
       {/* ================= VIDEO MODE ================= */}
       {showVideo && (
-        <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute inset-0 overflow-hidden ">
           <iframe
-            className="absolute top-1/2 left-1/2 max-xl:w-[300%] h-[200%] w-[100%]   -translate-x-1/2 -translate-y-1/2"
+            className="absolute top-1/2 left-1/2 w-[100%] h-[200%]  max-2xl:w-[200%] max-md:w-[350%] -translate-x-1/2 -translate-y-1/2"
             src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&playlist=${videoId}`}
             frameBorder="0"
             allow="autoplay; fullscreen"
