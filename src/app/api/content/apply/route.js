@@ -1,0 +1,56 @@
+import { connectDb } from "@/lib/connectDb";
+import { Content } from "@/models/Content";
+import { NextResponse } from "next/server";
+
+/**
+ * CREATE or UPDATE apply link (single content document)
+ */
+export async function POST(req) {
+  try {
+    await connectDb();
+
+    const { link, enabled, deadline, title } = await req.json();
+
+    if (!link) {
+      return NextResponse.json(
+        { success: false, message: "Link is required" },
+        { status: 400 }
+      );
+    }
+
+    // Find single content document
+    let content = await Content.findOne();
+
+    if (!content) {
+      content = await Content.create({
+        apply_link: {
+          src: link,
+          enabled,
+          deadline,
+          title
+        },
+      });
+    } else {
+      content.apply_link.src = link;
+      content.apply_link.enabled = enabled;
+      content.apply_link.deadline = deadline;
+      content.apply_link.title = title;
+      await content.save();
+    }
+
+    return NextResponse.json({
+      success: true,
+      message: "Application form saved successfully",
+      src: content.apply_link.src,
+      enabled: content.apply_link.enabled,
+      deadline: content.apply_link.deadline,
+      title: content.apply_link.title = title,
+      _id: content._id,
+    });
+  } catch (err) {
+    return NextResponse.json(
+      { success: false, message: err.message },
+      { status: 500 }
+    );
+  }
+}

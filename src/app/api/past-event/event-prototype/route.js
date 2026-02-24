@@ -1,0 +1,82 @@
+import { NextResponse } from "next/server";
+import { authOptions } from "../../auth/[...nextauth]/route";
+import { getServerSession } from "next-auth";
+import { Admin } from "@/models/Admin";
+import { Event } from "@/models/Event";
+import { deleteFileFromS3, uploadFileToS3 } from "@/lib/uploadImageFileToS3";
+import { connectDb } from "@/lib/connectDb";
+
+export async function PUT(req) {
+  await connectDb();
+  const session = await getServerSession(authOptions);
+  const isAdmin = await Admin.findOne({ email: session?.user?.email });
+  if (!isAdmin) {
+    return NextResponse.json(
+      { success: false, message: "Access denied" },
+      { status: 403 },
+    );
+  }
+  try {
+    const formData = await req.formData();
+    const id = formData.get("_id");
+    if (!id) {
+      return NextResponse.json(
+        { success: false, message: "_id is required for update" },
+        { status: 400 },
+      );
+    }
+    const event = await Event.findById(id);
+    if (!event) {
+      return NextResponse.json(
+        { success: false, message: "event not found" },
+        { status: 404 },
+      );
+    }
+    const removedImages = JSON.parse(formData.get("removedImages") || "[]");
+    const imageFiles = formData.getAll("images") || [];
+
+    const getRemovedImages = removedImages.map((i) => i.url);
+    const imagesOrder = JSON.parse(formData.get("imagesOrder") || "[]");
+  
+    let updateImage = event.prototypes.filter((img) => !getRemovedImages.includes(img)) || [];
+    if (getRemovedImages.length > 0) {
+      for (const img of getRemovedImages) {
+        const key = img.split("/").pop();
+        if (key) await deleteFileFromS3(key);
+      }
+    }
+    // Upload new images to S3
+    const uploadPromises = imageFiles
+      .filter((file) => file.size > 0)
+      .map((file) => uploadFileToS3(file));
+  
+    const uploadedUrls = await Promise.all(uploadPromises);
+    updateImage.push(...uploadedUrls);
+
+   
+       if (imagesOrder.length > 0) {
+      const orderedUrls = imagesOrder.map((img) => img.url);
+
+      // Add new images that are NOT in order list
+      for (const img of updateImage) {
+        if (!orderedUrls.includes(img)) {
+          orderedUrls.push(img);
+        }
+      }
+      event.prototypes = orderedUrls;
+    } else {
+      event.prototypes = updateImage;
+    }
+    await event.save();
+    return NextResponse.json({
+      success: true,
+      event,
+      message: "Prototypes images saved",
+    });
+  } catch (err) {
+    return NextResponse.json(
+      { success: false, message: err.message },
+      { status: 500 },
+    );
+  }
+}
