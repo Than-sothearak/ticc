@@ -23,10 +23,10 @@ export default function DashboardGrid() {
     <div className="p-10">
       <h1 className="text-3xl font-bold mb-8">Admin Dashboard</h1>
 
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-6">
         {flatLinks.map((link, i) => (
           <Link key={i} href={link.path} passHref>
-            <Card className="cursor-pointer hover:shadow-xl transition transform hover:-translate-y-1">
+            <Card className="cursor-pointer hover:shadow-xl transition transform hover:-translate-y-1 max-md:whitespace-nowrap">
               <CardHeader>
                 <div className="flex items-start gap-4">
                     <div className="text-primary">
