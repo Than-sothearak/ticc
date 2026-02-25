@@ -17,7 +17,7 @@ export default function FqaTable({ fqas }) {
 
   return (
     <>
-      <div className="space-y-4 md:w-[580px] w-full m-auto max-h-[400px] overflow-y-auto    ">
+      <div className="space-y-4 md:w-[580px] w-full m-auto">
         {fqasData.map((item) => (
           <Card key={item._id} className="p-4 flex justify-between items-start">
             <div className="space-y-1">

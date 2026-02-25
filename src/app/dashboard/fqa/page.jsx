@@ -11,7 +11,9 @@ const fqaPage = async () => {
   return (
     <div className='mt-8 lg:px-16 px-2 space-y-6'>
         <FqaForm />
-        <FqaTable fqas={JSON.parse(JSON.stringify(fqas))}/>
+         <div className="max-h-[60vh] overflow-y-auto">
+    <FqaTable fqas={JSON.parse(JSON.stringify(fqas))} />
+  </div>
         </div>
   )
 }

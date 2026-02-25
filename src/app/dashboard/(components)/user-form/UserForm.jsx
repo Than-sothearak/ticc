@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useTransition } from "react";
 
 import {
   Card,
@@ -9,49 +9,45 @@ import {
   CardTitle,
   CardDescription,
 } from "@/components/ui/card";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
+
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
-import { Trash } from "lucide-react";
 
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
+import { useRouter } from "next/navigation";
 
 export default function UserForm() {
+  const router = useRouter();
   const [email, setEmail] = useState("");
-  const [users, setUsers] = useState([]);
-  const [deleteUserId, setDeleteUserId] = useState(null);
+  const [isPending, startTransition] = useTransition();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!email) return;
+    startTransition(async () => {
+      let method = "POST";
+      try {
+        const res = await fetch("/api/add-admin", {
+          method,
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: email,
+          }),
+        });
 
-    setUsers([...users, { email, id: Date.now() }]);
-    setEmail("");
-  };
-
-  const handleDelete = () => {
-    if (deleteUserId !== null) {
-      setUsers(users.filter((user) => user.id !== deleteUserId));
-      setDeleteUserId(null);
-    }
+        const result = await res.json();
+        if (!res.ok) {
+          alert(result.message);
+        } else {
+          setEmail("");
+          router.refresh(); // Refresh the page to show the new FQA in the table
+          alert(result.message);
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    });
   };
 
   return (
@@ -77,67 +73,14 @@ export default function UserForm() {
                 required
               />
             </div>
-            <Button type="submit" variant="outline">
-              Add User
-            </Button>
+            <div className="flex gap-2">
+              <Button disabled={isPending} type="submit">
+                {isPending ? "Saving..." : "Add admin"}
+              </Button>
+            </div>
           </form>
         </CardContent>
       </Card>
-
-      {/* Users Table */}
-      {users.length > 0 && (
-        <Card className="md:w-[580px] w-full m-auto">
-          <CardHeader>
-            <CardTitle>Admin Lists</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Email</TableHead>
-                  <TableHead>ID</TableHead>
-                  <TableHead>Action</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {users.map((user) => (
-                  <TableRow key={user.id}>
-                    <TableCell>{user.email}</TableCell>
-                    <TableCell>{user.id}</TableCell>
-                    <TableCell>
-                      {/* AlertDialog */}
-                      <AlertDialog>
-                        <AlertDialogTrigger asChild>
-                          <Button
-                            variant="outline"
-                            onClick={() => setDeleteUserId(user.id)}
-                          >
-                            <Trash />
-                          </Button>
-                        </AlertDialogTrigger>
-                        <AlertDialogContent>
-                          <AlertDialogHeader>
-                            <AlertDialogTitle>Delete User</AlertDialogTitle>
-                            <AlertDialogDescription>
-                              Are you sure you want to delete this user? This action cannot be undone.
-                            </AlertDialogDescription>
-                          </AlertDialogHeader>
-                          <AlertDialogFooter>
-                            <AlertDialogCancel>Cancel</AlertDialogCancel>
-                            <AlertDialogAction onClick={handleDelete}>
-                              Yes, Delete
-                            </AlertDialogAction>
-                          </AlertDialogFooter>
-                        </AlertDialogContent>
-                      </AlertDialog>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </CardContent>
-        </Card>
-      )}
     </div>
   );
 }

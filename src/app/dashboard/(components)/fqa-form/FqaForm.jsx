@@ -17,7 +17,6 @@ import { useRouter } from "next/navigation";
 export default function FqaForm({ data }) {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
-  const [isEditing, setIsEditing] = useState();
 
   const [formData, setFormData] = useState({
     question: data?.question || "",
@@ -42,24 +41,25 @@ export default function FqaForm({ data }) {
         });
 
         const result = await res.json();
-        if (!res.ok) alert(result.message);
-        if (data?._id) {
+        if (!res.ok) {
           alert(result.message);
-          router.refresh(); // Refresh the page to show the new FQA in the table
-          setIsEditing(false);
+        } else {
+          if (data?._id) {
+            alert(result.message);
+            router.refresh(); // Refresh the page to show the new FQA in the table
+            setFormData({
+              question: result.fqa.question,
+              answer: result.fqa.answer,
+            });
+            return;
+          }
           setFormData({
-            question: result.fqa.question,
-            answer: result.fqa.answer,
+            question: "",
+            answer: "",
           });
-          return;
+          router.refresh(); // Refresh the page to show the new FQA in the table
+          alert(result.message);
         }
-        setFormData({
-          question: "",
-          answer: "",
-        });
-        router.refresh(); // Refresh the page to show the new FQA in the table
-        setIsEditing(false);
-        alert(result.message);
       } catch (err) {
         console.error(err);
       }
@@ -76,11 +76,15 @@ export default function FqaForm({ data }) {
             <CardDescription>Manage Frequently Asked Questions</CardDescription>
           </div>
           <div className="flex gap-2">
-            {data?._id ? <Button disabled={isPending} type="submit">
-              {isPending ? "Saving..." : "Update"}
-            </Button> : <Button disabled={isPending} type="submit">
-              {isPending ? "Saving..." : "Add"}
-            </Button>}
+            {data?._id ? (
+              <Button disabled={isPending} type="submit">
+                {isPending ? "Saving..." : "Update"}
+              </Button>
+            ) : (
+              <Button disabled={isPending} type="submit">
+                {isPending ? "Saving..." : "Add"}
+              </Button>
+            )}
           </div>
         </CardHeader>
         <CardContent className="space-y-4">
@@ -103,7 +107,7 @@ export default function FqaForm({ data }) {
           <div className="w-full">
             <Label htmlFor="email">Answer</Label>
             <Textarea
-            className="min-h-48 "
+              className="min-h-36"
               type="textarea"
               id="answer"
               placeholder="Answer...."
