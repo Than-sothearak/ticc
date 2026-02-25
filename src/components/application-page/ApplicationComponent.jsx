@@ -6,6 +6,7 @@ import FadeUp from "../motion/FadeUp";
 import StaggerSection from "../motion/StaggerSection";
 import { HeaderSectionComponent } from "../HeaderSectionComponent";
 import { ApplyButton } from "../ApplyButton";
+import Link from "next/link";
 
 export const ApplicationComponent = ({ applyLink }) => {
   return (
@@ -264,6 +265,19 @@ export const ApplicationComponent = ({ applyLink }) => {
                   <strong> prototypes</strong>, and the{" "}
                   <strong>training</strong> and <strong>mentoring</strong>.
                 </h3>
+              </div>
+            </FadeUp>
+          </div>
+        </section>
+
+          <section className="flex justify-center gap-6 space-y-16 w-full ">
+          <div className="container flex justify-center text-start my-16 lg:px-14">
+            <FadeUp>
+              <div className="flex gap-4 flex-col text-center">
+                <h1 className="text-xl font-bold">For more infomation</h1>
+               <Link href="/#contact" className="text-blue-600 hover:underline text-4xl">
+               Contact us
+               </Link>
               </div>
             </FadeUp>
           </div>

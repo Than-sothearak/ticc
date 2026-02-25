@@ -10,8 +10,8 @@ const ObjectivesSection = () => {
     <div className="w-full lg:h-screen flex justify-center text-center relative">
 
 
-      <div className="w-full text-white h-full grid bg-no-repeat bg-[url('/images/IMG_8244.JPG')]">
-        <div className="col-start-1 row-start-1 bg-gray-800 bg-opacity-80 w-full h-full"></div>
+      <div className="w-full text-white h-full grid bg-no-repeat bg-[url('/images/IMG_7640.JPG')]">
+        <div className="col-start-1 row-start-1 bg-primary bg-opacity-80 w-full h-full"></div>
         <div className="col-start-1 row-start-1 mx-auto my-auto">
           <div className="container sm:px-20 px-6 flex flex-col gap-10">
 
@@ -24,11 +24,11 @@ const ObjectivesSection = () => {
               </FadeUp>
 
               <FadeUp>
-                <p>
+                <h2>
                   Techno Innovation Challenge Cambodia aims to be the vibrant
                   platform where young Cambodian students activate their potential
                   and move their leadership, creativity, and innovation to the next level.
-                </p>
+                </h2>
               </FadeUp>
 
               {/* Objective Cards */}
