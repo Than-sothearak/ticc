@@ -11,8 +11,10 @@ import {
 } from "@/components/ui/card";
 import { DatePickerInput } from "../DatePicker";
 import { SaveButton } from "../button/SaveButton";
+import { useRouter } from "next/navigation";
 
 export default function InfomationForm({ data }) {
+  const router = useRouter()
   const [isPending, startTransition] = useTransition();
   const [isEditing, setIsEditing] = useState(false);
 
@@ -59,12 +61,12 @@ export default function InfomationForm({ data }) {
 
         const result = await res.json();
         if (!res.ok) alert(result.message);
-
+        
         setFormData({
           weeks: result.information.weeks,
           enabled: result.information.enabled,
         });
-
+        router.refresh()
         setIsEditing(false);
         alert(result.message);
       } catch (err) {

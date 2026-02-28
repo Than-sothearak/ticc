@@ -101,7 +101,7 @@ export default function SlideShowForm({ data }) {
 
           <iframe
             className="w-full aspect-video"
-            src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&playlist=${videoId}`}
+            src={`https://www.youtube.com/embed/${videoId}?autoplay=0&mute=1&loop=1&playlist=${videoId}`}
             frameBorder="0"
             allow="autoplay; fullscreen"
           />
