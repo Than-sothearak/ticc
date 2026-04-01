@@ -114,6 +114,8 @@ export const ImageManagerForm = ({
     setIsEditing(false);
     setIsUpload(false);
   };
+
+  console.log("images", images);
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       <Card>

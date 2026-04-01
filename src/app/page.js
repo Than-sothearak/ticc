@@ -3,7 +3,6 @@ import dynamic from "next/dynamic";
 import ObjectivesSection from "@/components/ObjectivesSection";
 import AboutSection from "@/components/AboutSection";
 import BackgroundSection from "@/components/BackgroundSection";
-import VideoHero from "@/components/VideoHero";
 import Navbar from "@/components/navbar/Navbar";
 import { Content } from "@/models/Content";
 import { connectDb } from "@/lib/connectDb";
