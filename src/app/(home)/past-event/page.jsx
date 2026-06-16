@@ -4,8 +4,6 @@ import { connectDb } from "@/lib/connectDb";
 import { Event } from "@/models/Event";
 import { EventsComponent } from "@/components/event-page/EventsComponent";
 
-export const revalidate = 60
-
 const Page = async () => {
   await connectDb()
   const events = await Event.find().sort({createdAt : -1}).lean();

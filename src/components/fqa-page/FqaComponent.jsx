@@ -7,6 +7,8 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { HeaderSectionComponent } from "../HeaderSectionComponent";
+import StaggerSection from "../motion/StaggerSection";
+import FadeUp from "../motion/FadeUp";
 const FqaComponent = ({fqas}) => {
   return (
     <div className="w-full">
@@ -20,12 +22,14 @@ const FqaComponent = ({fqas}) => {
         <div className="container text-start">
           <h1 className="font-bold text-[2.986rem] leading-tight">FQA</h1>
 
-          <Accordion type="multiple" collapsible>
+           <Accordion type="multiple" collapsible>
             {fqas && fqas.map((fqa, index) => (
-              <AccordionItem key={fqa._id} value={`item-${fqa._id}`}>
+             <FadeUp key={index}>
+                 <AccordionItem value={`item-${fqa._id}`}>
                 <AccordionTrigger>{fqa.question}</AccordionTrigger>
                 <AccordionContent>{fqa.answer}</AccordionContent>
               </AccordionItem>
+             </FadeUp>
             ))}
        
 

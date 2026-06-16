@@ -1,12 +1,11 @@
 "use client";
 import React from "react";
 import { motion } from "framer-motion";
-import { Calendar, LocateIcon, MapPin } from "lucide-react";
+import { Calendar,MapPin } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import StaggerSection from "../motion/StaggerSection";
 import FadeUp from "../motion/FadeUp";
-import { HeaderSectionComponent } from "../HeaderSectionComponent";
 
 const pastEvents = [
   {
@@ -68,7 +67,7 @@ export const EventsComponent = ({ events }) => {
                 >
                   <motion.div
                     whileHover={{ y: -10 }}
-                    className="bg-white rounded-md shadow-lg overflow-hidden  border w-full relative"
+                    className="bg-white rounded-md shadow-lg overflow-hidden  border w-full relative h-full"
                   >
                     {/* Image */}
                     <div className="w-full h-full relative">
