@@ -148,15 +148,17 @@ export const ImageManagerForm = ({
           <ReactSortable
             list={images}
             setList={setImages}
-            className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-3"
+            className={`grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 ${isEditing ? "cursor-move " : ""}`}
             animation={150}
+          
             disabled={!isEditing}
             ghostClass="opacity-50"
           >
             {images?.map((img, index) => (
               <div
                 key={index}
-                className="relative h-full w-full border rounded-xl overflow-hidden group"
+                  title={isEditing ? "Drag to reorder" : "Image"}
+                className="relative h-full w-full border rounded-xl overflow-hidden group "
               >
                 <Image
                   height={192}
@@ -168,6 +170,7 @@ export const ImageManagerForm = ({
                 {isEditing && (
                   <Button
                     size="icon"
+                    title="Remove image"
                     variant="outline"
                     className="absolute inset-0 m-auto opacity-0 group-hover:opacity-100"
                     onClick={() => handleRemoveImage(index)}
