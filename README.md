@@ -1,7 +1,6 @@
 # TICC Website & Admin Dashboard
-
+TICC Website & Admin Dashboard — A content management and public website platform for Techno Innovation Challenge Cambodia, built with Next.js, React, Tailwind CSS, MongoDB, NextAuth, and AWS S3. It includes admin-managed content, events, mentors, partners, application information, rich-text editing, and media managemen
 This is a Next.js 14 project for managing and displaying content for Techno Innovation Challenge Cambodia (TICC).  
-The project includes an admin dashboard, public website, MongoDB database, Google authentication, and AWS S3 image storage.
 
 ---
 
